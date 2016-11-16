@@ -4,6 +4,7 @@ require_once __DIR__.'/../';
  * 
  */
 class ClienteService{
+
     public function registrar(){
            try {
            //manager transaction
