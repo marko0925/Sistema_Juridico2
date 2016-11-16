@@ -2,14 +2,14 @@
   /**
    *
    */
-  class Persona{
+  class PersonaDTO{
     private $dni;
     private $nombre;
     private $apellido;
     private $correo;
     private $fecha_nac;
     private $telefono;
-    function Persona($dni,$nombre, $apellido, $correo, $fecha_nac, $telefono){
+    function PersonaDTO($dni,$nombre, $apellido, $correo, $fecha_nac, $telefono){
       $this->dni = $dni;
       $this->nombre = $nombre;
       $this->apellido = $apellido;

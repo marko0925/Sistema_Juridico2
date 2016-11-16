@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__.'/../factory/TransactionManager.php';
+require_once __DIR__ . '/../factory/TransactionManager.php';
+require_once __DIR__.'/../dao/AbogadoDAO.php';
 /**
  * Created by PhpStorm.
  * User: McBro
@@ -11,13 +12,16 @@ class AbogadoService
 
     public function registrar($dto)
     {
-        try{
+        try {
             $transaccion = new TransactionManager();
             $transaccion->beginTransaction();
 
             $abogadoDAO = $transaccion->getDAO("AbogadoDAO");
-        }catch (Exception $e){
-
+            $abogadoDAO->registrar();
+        } catch (Exception $e) {
+            if (isset($transaccion)) {
+                $transaccion->rollback();
+            }
         }
     }
 }

@@ -6,7 +6,7 @@
  * Date: 16/11/2016
  * Time: 4:40 PM
  */
-class AbogadoDTO extends Persona
+class AbogadoDTO extends PersonaDTO
 {
     private $especialidad;
     private $almamater;
@@ -16,7 +16,7 @@ class AbogadoDTO extends Persona
      */
     public function __construct($dni, $nombre, $apellido, $correo, $fecha_nac, $telefono, $especialidad, $almamater)
     {
-        parent::Persona($dni,$nombre,$apellido,$correo,$fecha_nac,$telefono);
+        parent::PersonaDTO($dni,$nombre,$apellido,$correo,$fecha_nac,$telefono);
         $this->especialidad = $especialidad;
         $this->almamater = $almamater;
     }

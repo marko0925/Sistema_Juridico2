@@ -15,5 +15,9 @@ class AbogadoDAO
      */
     public function __construct()
     {
+
+    }
+    public function registrar(){
+
     }
 }
