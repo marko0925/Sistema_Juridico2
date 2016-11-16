@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__.'/../';
 /**
  * 
  */
+require_once __DIR__.'/../factory/TransactionManager.php';
 class ClienteService{
 
     public function registrar(){
@@ -14,7 +14,7 @@ class ClienteService{
             * @var UsuarioDAO $usuarioDAO
             */
            $usuarioDAO=$transaccion->getDAO('UsuarioDAO');
-           $usuarioDAO->saved($dto);
+           $usuarioDAO->saved();
            $usuarioDAO->
            //guardar
            $transaccion->flush();
@@ -28,8 +28,16 @@ class ClienteService{
     }
     
     public function listar(){
-        $manager = new  TransactionManager();
-        $dao=$manager->getDAO('ClienteDAO');
-        return $dao->listado();
+        try{
+            $manager = new  TransactionManager(true);
+            $dao=$manager->getDAO('ClienteDAO');
+        }
+        finally{
+            if(!isset($manager)){
+                $manager->close();
+            }
+        }
+
+        return $dao->listar();
     }
 }

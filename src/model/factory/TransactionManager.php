@@ -1,20 +1,5 @@
 <?php
 require_once __DIR__.'/../dao/config/Connection.php';
-
-
-
-function autoload_classes($class_name)
-{
-    $filename = PROJECTPATH .DS.'src/dao/'. $class_name .'.php';
-    if(is_file($filename))
-    {
-        include_once $filename;
-    }
-}
-//registramos el autoload autoload_classes
-spl_autoload_register('autoload_classes');
-
-
 /**
  * Created by PhpStorm.
  * User: Miguel
@@ -84,9 +69,13 @@ class TransactionManager
      * @return object
      */
     public function getDAO($name){
+        require_once __DIR__."/../dao/$name.php";
         $this->generarTransaction();
         $dao= new $name($this->transaction);
         return $dao;
+    }
+    public function close(){
+        $this->transaction->close_con();
     }
 
 }
