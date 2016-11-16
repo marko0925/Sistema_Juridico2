@@ -9,7 +9,11 @@
     private $correo;
     private $fecha_nac;
     private $telefono;
+<<<<<<< HEAD
+    function __construct($dni=null,$nombre=null, $apellido=null, $correo=null, $fecha_nac=null, $telefono=null){
+=======
     function PersonaDTO($dni,$nombre, $apellido, $correo, $fecha_nac, $telefono){
+>>>>>>> 47cd0fcb6862f3154cd6c608e7e900861e785faf
       $this->dni = $dni;
       $this->nombre = $nombre;
       $this->apellido = $apellido;
@@ -17,6 +21,7 @@
       $this->fecha_nac = $fecha_nac;
       $this->telefono = $telefono;
     }
+
     function getDni() {
         return $this->dni;
     }

@@ -40,5 +40,14 @@ class ClienteController extends BaseController
         //@type Connection
 //             
     }
+    public function getListadoClientes(){
+        /**
+         * @var ClienteService
+         */
+        $servicio = new ClienteService();
+        $listadoDTO=$servicio->listar();
+        $json=json_encode($listadoDTO);
+        echo $json;
+    }
 
 }

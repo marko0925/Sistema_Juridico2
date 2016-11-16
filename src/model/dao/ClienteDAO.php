@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__.'/../dto/ClienteDTO.php';
 class ClienteDAO{
     private $con;
     
@@ -6,19 +7,24 @@ class ClienteDAO{
         $this->con=$con;
     }
 
+    /**
+     * Obtiene un array de objetos de tipo ClienteDTO
+     * @return array
+     */
     public function listar(){
-        $sql='Select * from _cliente';
-        $resultSet=$con->findAll($sql);
+        $sql='SELECT p._dni,p._nombre,p._apellido,p._correo,p._fecha_nac,p._telefono FROM  _cliente c INNER JOIN _persona p ON c._dni_cliente=p._dni';
+        $resultSet=$this->con->findAll($sql);
         $listado=  array();
         foreach ($resultSet as $row){
-           $dto= new UsuarioDTO();
-           $dto->setDni($resultSet['_dni']);
-           $dto->setApellido($resultSet['_nombre']);
-           $dto->setNombre($resultSet['_apellido']);
-           $dto->setCorreo($resultSet['_correo']);
-           $dto->setFecha_nac($resultSet['_fecha_nac']);
-           $dto->setTelefono($resultSet['_telefono']);
+           $dto= new ClienteDTO();
+           $dto->setDni($row['_dni']);
+           $dto->setApellido($row['_apellido']);
+           $dto->setNombre($row['_nombre']);
+           $dto->setCorreo($row['_correo']);
+           $dto->setFecha_nac($row['_fecha_nac']);
+           $dto->setTelefono($row['_telefono']);
            $listado[]=$dto;
         }
+        return $listado;
     }
 }
