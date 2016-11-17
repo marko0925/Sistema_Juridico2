@@ -33,10 +33,11 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"   onclick="abrirVista('proceso/formularioRegistro')"><a href="#"><i class="fa fa-circle-o"></i> Registrar</a></li>
+                    <li class="active" onclick="abrirVista('proceso/formularioRegistro')"><a href="#"><i
+                                class="fa fa-circle-o"></i> Registrar</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> Listar</a></li>
-                    <li ><a href="#"><i class="fa fa-circle-o"></i> Observaciones</a></li>
-                    <li ><a href="#"><i class="fa fa-circle-o"></i> Citas</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Observaciones</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Citas</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -48,8 +49,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Registrar</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Listar</a></li>
+                    <li><a href="#" id="registrarAbogado"><i class="fa fa-circle-o"></i> Registrar</a></li>
+                    <li><a href="#" id="listarAbogado"><i class="fa fa-circle-o"></i> Listar</a></li>
 
                 </ul>
             </li>
