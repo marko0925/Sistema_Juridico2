@@ -29,7 +29,7 @@ class ClienteController extends BaseController
          // @type UsuarioDTO
          $dto= new UsuarioDTO();
          $dto->setDni(3);
-         $dto->setApellido('oprdoñez gayon');
+         $dto->setApellido('oprdoez gayon');
          $dto->setNombre('miguel angel');
          $dto->setCorreo('marlonyasid09@gmail.com');
          $dto->setFecha_nac('2-4-2011');

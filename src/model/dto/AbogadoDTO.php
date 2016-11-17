@@ -16,7 +16,7 @@ class AbogadoDTO extends PersonaDTO
      */
     public function __construct($dni, $nombre, $apellido, $correo, $fecha_nac, $telefono, $especialidad, $almamater)
     {
-        parent::PersonaDTO($dni,$nombre,$apellido,$correo,$fecha_nac,$telefono);
+        parent::__construct($dni,$nombre,$apellido,$correo,$fecha_nac,$telefono);
         $this->especialidad = $especialidad;
         $this->almamater = $almamater;
     }
