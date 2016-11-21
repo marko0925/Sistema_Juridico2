@@ -1,5 +1,5 @@
 <?php
-
+include_once __DIR__.'/PersonaDTO.php';
 /**
  * Created by PhpStorm.
  * User: McBro

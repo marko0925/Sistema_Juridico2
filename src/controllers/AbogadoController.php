@@ -22,13 +22,28 @@ class AbogadoController extends BaseController
     /**
      *
      */
+    public function getRegistrarAbogado(){
+        $this->setView("abogado/registrarAbogado");
+    }
+
+    /**
+     *
+     */
+    public function getlistarAbogados(){
+        $serviceAbogado =  new AbogadoService();
+        $listadoAbogados = $serviceAbogado->listarAbogados();
+        $this->setView("abogado/listarAbogados",$listadoAbogados);
+    }
+    /**
+     *
+     */
     public function postRegistrar()
     {
         $dni = $_POST["txtDniAbogado"];
         $nombre = $_POST["txtNombreAbogado"];
         $apellido = $_POST["txtApellidoAbogado"];
         $correo = $_POST["txtCorreoAbogado"];
-        $fecha_nac = $_POST["txtFechaNacimiento"];
+        $fecha_nac = $_POST["txtFechaNacimientoAbogado"];
         $telefono = $_POST["txtTelefonoAbogado"];
         $especialidad = $_POST["txtEspecialidadAbogado"];
         $almamater = $_POST["txtAlmamaterAbogado"];

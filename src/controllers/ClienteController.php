@@ -16,6 +16,15 @@ class ClienteController extends BaseController
         parent::__construct();
     }
 
+
+    public function getRegistrarCliente(){
+        $this->setView("cliente/registrarCliente");
+    }
+
+    public function getListarClientes(){
+        //datos
+        $this->setView("cliente/listarClientes",[]);
+    }
     public function postRegistrar()
     {
 
