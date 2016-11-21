@@ -2,19 +2,35 @@
     <!-- general form elements -->
     <form role="form" action="abogado/registrar" method="post">
         <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
+            <!--
+            <ul id="ml-tah" class="nav nav-tabs">
                 <li class="active" id="tab-abogado">
-                    <a href="#Abogado" data-toggle="tab" aria-expanded="true">Abogado</a>
+                    <a href="#Abogado" data-toggle="tab" id="temp" aria-expanded="true">Abogado</a>
                 </li>
                 <li class="" id="tab-especialidad">
-                    <a href="#Especializacion" data-toggle="tab" aria-expanded="false">Especialización</a>
+                    <a href="#Especializacion" data-toggle="tab" aria-expanded="false">EspecializaciÃ³n</a>
                 </li>
             </ul>
 
-            <div class="tab-content">
+            
+               -->
 
-                <div class="tab-pane active" id="Abogado">
+        
 
+    
+    <!-- /.box -->
+
+
+  <!-- Nav tabs -->
+  <ul id="ml-tah" class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#abogado" aria-controls="home" role="tab" data-toggle="tab">Abogado</a></li>
+    <li role="presentation"  id="tab_especialidad"><a href="#especializacion" aria-controls="profile" role="tab" data-toggle="tab">Especializacion</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="home">
+          
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-3">
@@ -52,9 +68,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Contraseña</label>
+                                    <label for="exampleInputPassword1">ContraseÃ±a</label>
                                     <input type="password" class="form-control" id="exampleInputPassword1"
-                                           placeholder="Digita la contraseña">
+                                           placeholder="Digita la contraseÃ±a">
                                 </div>
                             </div>
 
@@ -105,16 +121,19 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <a href="#Especializacion" class="btn btn-primary" data-toggle="tab" aria-expanded="true"
+                        <a href="#id_especializacion" class="btn btn-primary" data-toggle="tab" aria-expanded="true"
                            id="ctrl-tabs">Continuar</a>
                     </div>
-                </div>
-                <div class="tab-pane active" id="Especializacion">
-                    <div class="box-body">
+      </div> 
+      
+      
+      
+      <div role="tabpanel" class="tab-pane" id="profile">
+          <div class="box-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Nombre de la especialización</label>
+                                    <label>Nombre de la especializaciÃ³n</label>
                                     <input required type="text" placeholder="Nombre de la especializacion hecha."
                                            class="form-control" name="txtEspecialidadAbogado">
                                 </div>
@@ -137,7 +156,7 @@
                         <div class="form-group">
                             <label>Universidad/Instituto</label>
                             <input required type="text" class="form-control"
-                                   placeholder="Universidad/Instituto de la especialización."
+                                   placeholder="Universidad/Instituto de la especializaciÃ³n."
                                    name="txtUniversidadActaAbogado">
                         </div>
 
@@ -151,15 +170,18 @@
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
-                </div>
-
-            </div
-
-                <!-- /.box-header -->
-                <!-- form start -->
-
-        </div>
-
-    </form>
-    <!-- /.box -->
+      </div>
+  </div>
+    </div>
+  </form>
 </div>
+<script type="text/javascript">
+    
+    $(document).ready(function(){
+        console.log("dffd");
+        //$(".tabs").tabs();
+        $("#Especializacion").tab("show");
+        console.log("defd");
+    });
+
+</script>
