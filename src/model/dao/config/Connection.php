@@ -9,50 +9,89 @@
 class Connection extends PDO
 {
 
-   //nombre base de datos
-   private $dbname = "Sistema_Juridico";
-   //nombre servidor
-   private $host = "sandbox2.ufps.edu.co";
-   //nombre usuarios base de datos
-   private $user = "postgres";
-   //password usuario
-   private $pass = "ufps";
-   //puerto postgreSql
-   private $port = 5432;
-   //creamos la conexión a la base de datos prueba
-   public function __construct()
-   {
-       try {
+    //nombre base de datos
+    private $dbname = "Sistema_Juridico";
+    //nombre servidor
+    private $host = "sandbox2.ufps.edu.co";
+    //nombre usuarios base de datos
+    private $user = "postgres";
+    //password usuario
+    private $pass = "ufps";
+    //puerto postgreSql
+    private $port = 5432;
 
-           parent::__construct("pgsql:host=$this->host;port=$this->port;dbname=$this->dbname;user=$this->user;password=$this->pass");
+    private $estado = false;
 
-       } catch(PDOException $e) {
+    //creamos la conexión a la base de datos prueba
+    public function __construct()
+    {
+        try {
 
-           echo  $e->getMessage();
+            parent::__construct("pgsql:host=$this->host;port=$this->port;dbname=$this->dbname;user=$this->user;password=$this->pass");
 
-       }
+        } catch (PDOException $e) {
 
-   }
+            echo $e->getMessage();
 
-   //función para cerrar una conexión pdo
-   public function close_con()
-   {
+        }
 
-       $this->dbh = null;
+    }
 
-   }
-   
-   public function save($query,$parametros){
-       
-   }
-   public function findAll($query){
-        $statement=  $this->prepare($query);
+    /**
+     * desactivado por ahora
+     * @return bool
+     */
+    public function beginTransaction()
+    {
+        if (!$this->estado){
+            $this->estado=true;
+            return parent::beginTransaction();
+        }
+
+    }
+
+    /**
+     * @param string $query
+     * @param array $parametros
+     * @return bool
+     */
+    public function save($query, $parametros)
+    {
+        $estado = false;
+        $statement = $this->prepare($query);
+        $this->beginTransaction();
+        if ($statement->execute($parametros)) {
+            $estado = true;
+        }
+        return $estado;
+    }
+
+    /**
+     * Busca en la base de datos un listado estaticos de datos
+     * @param string $query
+     * @return array
+     */
+    public function findAll($query)
+    {
+        $statement = $this->prepare($query);
         $statement->execute();
-        $listadoDTO=$statement->fetchAll();
+        $listadoDTO = $statement->fetchAll();
         return $listadoDTO;
-   }
-   public function findBy(){
-       
-   }
+    }
+
+    /**
+     * Metodo- busca y filtra  en la base de datos
+     * @param string $query
+     * @param array $parametros
+     * @return array|null
+     */
+    public function findBy($query,$parametros)
+    {
+        $result=null;
+        $statement = $this->prepare($query);
+        $statement->execute($parametros);
+        $result=$statement->fetchAll();
+        return $result;
+    }
 
 }
