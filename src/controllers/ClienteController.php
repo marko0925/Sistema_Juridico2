@@ -20,20 +20,27 @@ class ClienteController extends BaseController
     public function getRegistrarCliente(){
         $this->setView("cliente/registrarCliente");
     }
-
+    // sirve
     public function getListarClientes(){
-        //datos
-        $this->setView("cliente/listarClientes",[]);
+        servicio = new ClienteService();
+        $listadoDTO=$servicio->listar();
+        $this->setView("cliente/listarClientes",array('listadoDTO'=>$listadoDTO));
     }
+    //sirve
     public function postRegistrar()
     {
-
-
-        $convert = new JsonLoadDTO();
-        $dto = $convert->convert();
-
-        $service = new UsuarioService();
-        $service->registrarUsuario($dto);
+        require_once __DIR__.'/../model/dto/ClienteDTO.php';
+         // @type UsuarioDTO
+         $dto= new ClienteDTO();
+         $dto->setDni(7);
+         $dto->setApellido('coronel correa');
+         $dto->setNombre('marlon yesid');
+         $dto->setCorreo('marlonyasid09@gmail.com');
+         $dto->setFecha_nac('2-4-2011');
+         $dto->setTelefono('123456');
+         
+         $servicio= new ClienteService();
+         $servicio->registrar($dto);
     }
 
     public function getPruebaConexion()
@@ -51,17 +58,6 @@ class ClienteController extends BaseController
         $servicio->registrar($dto);
         //@type Connection
 //             
-    }
-
-    public function getListadoClientes()
-    {
-        /**
-         * @var ClienteService
-         */
-        $servicio = new ClienteService();
-        $listadoDTO = $servicio->listar();
-        $json = json_encode($listadoDTO);
-        echo $json;
     }
 
 }
