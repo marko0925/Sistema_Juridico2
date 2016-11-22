@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__.'/../dto/ClienteDTO.php';
 class ClienteDAO{
+    /**
+     * @var Connection
+     */
     private $con;
     
     public  function __construct($con){
@@ -26,5 +29,21 @@ class ClienteDAO{
            $listado[]=$dto;
         }
         return $listado;
+    }
+
+    /**
+     * @param ClienteDTO $dto
+     * @return boolean
+     */
+    public function registrar($dto){
+        $estado=false;
+        $sql='INSERT INTO _persona(_dni,_apellido,_nombre,_fecha_nac,_telefono,_correo) VALUES (?,?,?,?,?,?)';
+        $parametros=array($dto->getDni(),$dto->getApellido(),$dto->getNombre(),$dto->getFecha_nac(), $dto->getTelefono(),$dto->getCorreo());
+        if($this->con->save($sql,$parametros)){
+            $sql='INSERT INTO _cliente(_dni_cliente)VALUES(:dni)';
+            $parametros=array(':dni'=>$dto->getDni());
+            $estado=$this->con->save($sql,$parametros);
+        }
+        return $estado;
     }
 }
