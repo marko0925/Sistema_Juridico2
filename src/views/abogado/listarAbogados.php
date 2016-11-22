@@ -5,18 +5,10 @@
     <!-- /.box-header -->
     <div class="box-body">
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-            <div class="row">
 
-                <div class="col-sm-6">
-                    <div id="example1_filter" class="dataTables_filter"><label>Buscar: &nbsp <input type="search"
-                                                                                                    class="form-control input-sm"
-                                                                                                    placeholder=""
-                                                                                                    aria-controls="example1"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
+
                 <div class="col-sm-12">
+
                     <table id="lista-abogados" class="table table-bordered table-striped dataTable" role="grid"
                            aria-describedby="example1_info">
                         <thead>
@@ -54,21 +46,9 @@
                         </tr>
                         </thead>
 
-                        <tfoot>
-                        <tr>
-                            <th rowspan="1" colspan="1">DNI</th>
-                            <th rowspan="1" colspan="1">Nombre</th>
-                            <th rowspan="1" colspan="1">Apellido</th>
-                            <th rowspan="1" colspan="1">Correo</th>
-                            <th rowspan="1" colspan="1">Telefono</th>
-                            <th rowspan="1" colspan="1">Fecha Nacimiento</th>
-                            <th rowspan="1" colspan="1">Especialidad</th>
-                            <th rowspan="1" colspan="1">Almamater</th>
-                        </tr>
-                        </tfoot>
                     </table>
                 </div>
-            </div>
+
             <!--<div class="row">
                  <div class="col-sm-5">
                      <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of

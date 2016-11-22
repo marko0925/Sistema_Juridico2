@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <!-- general form elements -->
-    <form role="form" action="abogado/registrar" method="post">
+    <form role="form" action="abogado/registrar" method="post" novalidate>
         <div class="nav-tabs-custom">
             <!--
             <ul id="ml-tah" class="nav nav-tabs">
@@ -15,22 +15,22 @@
             
                -->
 
-        
 
-    
-    <!-- /.box -->
+            <!-- /.box -->
 
 
-  <!-- Nav tabs -->
-  <ul id="ml-tah" class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#abogado" aria-controls="home" role="tab" data-toggle="tab">Abogado</a></li>
-    <li role="presentation"  id="tab_especialidad"><a href="#especializacion" aria-controls="profile" role="tab" data-toggle="tab">Especializacion</a></li>
-  </ul>
+            <!-- Nav tabs -->
+            <ul id="ml-tah" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#abogado" aria-controls="home" role="tab"
+                                                          data-toggle="tab">Abogado</a></li>
+                <li role="presentation" id="tab_especialidad"><a href="#especializacion" aria-controls="profile"
+                                                                 role="tab" data-toggle="tab">Especializacion</a></li>
+            </ul>
 
-  <!-- Tab panes -->
-  <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="abogado">
-          
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="abogado">
+
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-3">
@@ -124,12 +124,11 @@
                         <a href="#especializacion" class="btn btn-primary" data-toggle="tab" aria-expanded="true"
                            id="ctrl-tabs">Continuar</a>
                     </div>
-      </div> 
-      
-      
-      
-      <div role="tabpanel" class="tab-pane" id="especializacion">
-          <div class="box-body">
+                </div>
+
+
+                <div role="tabpanel" class="tab-pane" id="especializacion">
+                    <div class="box-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -159,29 +158,70 @@
                                    placeholder="Universidad/Instituto de la especializaciÃ³n."
                                    name="txtUniversidadActaAbogado">
                         </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Subir Acta</label>
+                                    <input required type="file" id="exampleInputFile" name="acta">
 
-                        <div class="form-group">
-                            <label for="exampleInputFile">Subir Acta</label>
-                            <input required type="file" id="exampleInputFile">
+                                    <p class="help-block">Sube una copia de tu acta.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Especialidades</h3>
 
-                            <p class="help-block">Sube una copia de tu acta.</p>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body table-responsive no-padding">
+                                        <table class="table table-hover" id="tabla-especialidades">
+                                            <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Fecha</th>
+                                                <th>Universidad/Instituto</th>
+                                                <th>Acta</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            <tr>
+                                                <td>Abogado Penalista</td>
+                                                <td>11-7-2014</td>
+                                                <td>Universidad Francisco de Paula Santander</td>
+                                                <td>Criminal Lawyer.pdf</td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <!-- /.box -->
+                            </div>
+
                         </div>
                     </div>
+
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Registrar</button>
+                        <input type="button" id="anadir-especialidad" class="btn btn-primary" onclick="anadirEspec()"
+                               value="Añadir Especialización">
                     </div>
-      </div>
-  </div>
-    </div>
-  </form>
+
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary">Registrar</button>
+    </form>
+
 </div>
+
 <script type="text/javascript">
-    
-    $(document).ready(function(){
-        console.log("dffd");
+
+    $(document).ready(function () {
         //$(".tabs").tabs();
-        $("#Especializacion").tab("show");
-        console.log("defd");
+        //$("#Especializacion").tab("show");
     });
 
 </script>

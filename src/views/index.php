@@ -181,6 +181,7 @@
         </section>
     </div>
 </div>
+
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->
@@ -218,6 +219,10 @@
 <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <!-- hecho estudiantes -->
+<script src="dist/js/abogado/listarAbogado.js"></script>
+<script src="dist/js/abogado/registrarAbogado.js"></script>
+<script src="dist/js/cliente/listarClientes.js"></script>
+<script src="dist/js/cliente/registrarCliente.js"></script>
 <script src="dist/js/pages/contenedor.js"></script>
 <!--Single-Page-Aplication-Control-->
 <!--<script src="dist/js/spa.js"></script>-->
