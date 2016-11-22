@@ -59,7 +59,11 @@ class TransactionManager
      * Metodo genera un nuevo objeto de la clase Connection si $this->scope==false o $this->transaction==null
      */
     private  function generarTransaction(){
-        if(!isset($this->transaction) or !$this->scope){
+        if(!isset($this->transaction)){
+            $this->transaction = new Connection();
+            return;
+        }
+        if(isset($this->transaction) and !$this->scope){
             $this->transaction = new Connection();
         }
     }
@@ -75,7 +79,7 @@ class TransactionManager
         return $dao;
     }
     public function close(){
-        $this->transaction->close_con();
+        $this->transaction=null;
     }
 
 }
