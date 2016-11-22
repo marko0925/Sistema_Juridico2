@@ -20,7 +20,7 @@ class AbogadoController extends BaseController
     }
 
     /**
-     *
+     *estos deberia llamarse "getFormularioRegistro" por que hay no se registra nada ¬¬  
      */
     public function getRegistrarAbogado(){
         $this->setView("abogado/registrarAbogado");
@@ -30,8 +30,18 @@ class AbogadoController extends BaseController
      *
      */
     public function getlistarAbogados(){
-        $serviceAbogado =  new AbogadoService();
-        $listadoAbogados = $serviceAbogado->listarAbogados();
+        $service = new AbogadoService();
+        // retona un listadoAbogado<AbogadoDTO> forma de rrecorrer el array
+        // foreach($listadoAbogado as $itemArray){
+        //  $itemArray->metodoGet(); 
+        //}
+        $listadoAbogados=$service->listado();
+        //forma json 
+        /*
+        $json=json_encode($listadoAbogados);
+        echo $json;
+        y eliminar setView();
+        */
         $this->setView("abogado/listarAbogados",$listadoAbogados);
     }
     /**
@@ -47,10 +57,55 @@ class AbogadoController extends BaseController
         $telefono = $_POST["txtTelefonoAbogado"];
         $especialidad = $_POST["txtEspecialidadAbogado"];
         $almamater = $_POST["txtAlmamaterAbogado"];
-
-        $abogadoDTO = new AbogadoDTO($dni,$nombre,$apellido,$correo,$fecha_nac,$telefono,$especialidad,$almamater);
-
+        
+        $dto = new AbogadoDTO();
+       
+        $dto->setDni(5);
+        $dto->setApellido('jghf kljff');
+        $dto->setNombre('kjjfnf klfjjf');
+        $dto->setCorreo('nmvnnm@gmail.com');
+        $dto->setFecha_nac('1-3-2018');
+        $dto->setTelefono('009032');
+        $dto->setAlmamater('udes');
+        //especialidades abogado
+        $dtoEspecialidad1 = new EspecialidadDTO();
+        $dtoEspecialidad1->setNombre('matrimonio');
+        $dtoEspecialidad2 = new EspecialidadDTO();
+        $dtoEspecialidad2->setNombre('familiar');
+        //agrego las especialidades en un array al atributo especialidad de abogadoDTO
+        $dto->setEspecialidad(array($dtoEspecialidad1,$dtoEspecialidad2));
+        // servicio contiene la logica de negocio
         $serviceAbogado = new AbogadoService();
-        $serviceAbogado->registrar($abogadoDTO);
+        $serviceAbogado->registrar($dto);
+        
+    }
+    // en proceso de prueba creo que no sirve
+     public function getActualizar(){
+        $dto = new AbogadoDTO();
+        $dto->setDni(5);
+        $dto->setApellido('jghf kljff');
+        $dto->setNombre('kjjfnf klfjjf');
+        $dto->setCorreo('nmvnnm@gmail.com');
+        $dto->setFecha_nac('1-3-2018');
+        $dto->setTelefono('009032');
+        $dto->setAlmamater('udes');
+        //especialidades abogado
+        $dtoEspecialidad1 = new EspecialidadDTO();
+        $dtoEspecialidad1->setNombre('matrimonio');
+        $dtoEspecialidad2 = new EspecialidadDTO();
+        $dtoEspecialidad2->setNombre('familiar');
+        $dto->setEspecialidad(array($dtoEspecialidad1,$dtoEspecialidad2));
+        $serviceAbogado = new AbogadoService();
+        $serviceAbogado->actualizar($dto);
+
+    }
+    // parametro url?nitAbogado=5
+    // falta mostrar el array
+    public function getListarEspecialiciones(){
+      $nit=$_GET['nitAbogado'];
+      $service= new AbogadoService();
+        // array<EspecialidadDTO> de un abogado en especifico
+      $service->listarEspecializaciones($nit);
+
     }
 }
