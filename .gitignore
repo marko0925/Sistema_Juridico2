@@ -44,10 +44,5 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
-
-.idea/copyright/profiles_settings.xml
-.idea/modules.xml
-.idea/Sistema_Juridico2.iml
-.idea/workspace.xml
-.idea/workspace.xml
-.idea/workspace.xml
+.idea/
+.idea/copyright/

@@ -22,7 +22,7 @@ class ClienteController extends BaseController
     }
     // sirve
     public function getListarClientes(){
-        servicio = new ClienteService();
+        $servicio = new ClienteService();
         $listadoDTO=$servicio->listar();
         $this->setView("cliente/listarClientes",array('listadoDTO'=>$listadoDTO));
     }

@@ -82,19 +82,21 @@ class AbogadoController extends BaseController
     // en proceso de prueba creo que no sirve
      public function getActualizar(){
         $dto = new AbogadoDTO();
-        $dto->setDni(5);
+        $dto->setDni(4);
         $dto->setApellido('jghf kljff');
         $dto->setNombre('kjjfnf klfjjf');
         $dto->setCorreo('nmvnnm@gmail.com');
         $dto->setFecha_nac('1-3-2018');
         $dto->setTelefono('009032');
-        $dto->setAlmamater('udes');
-        //especialidades abogado
+        $dto->setAlmamater('upt');
+         /**
+          * @var EspecialidadDTO
+          */
         $dtoEspecialidad1 = new EspecialidadDTO();
         $dtoEspecialidad1->setNombre('matrimonio');
-        $dtoEspecialidad2 = new EspecialidadDTO();
-        $dtoEspecialidad2->setNombre('familiar');
-        $dto->setEspecialidad(array($dtoEspecialidad1,$dtoEspecialidad2));
+        //s$dtoEspecialidad2 = new EspecialidadDTO();
+        //$dtoEspecialidad2->setNombre('familiar');
+        $dto->setEspecialidad(array($dtoEspecialidad1));
         $serviceAbogado = new AbogadoService();
         $serviceAbogado->actualizar($dto);
 

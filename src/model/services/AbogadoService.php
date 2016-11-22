@@ -52,6 +52,7 @@ class AbogadoService
             $especialidadDAO=$manager->getDAO('EspecialidadDAO');
             $especialidadDAO->eliminarEspecialidad($dto->getDni());
             if($dto->getEspecialidad()!==null){
+                $especialidadDAO->eliminarEspecialidad($dto->getDni());
                 $especialidadDAO->registrarListadoEspecialidad($dto->getDni(),$dto->getEspecialidad());
             }
 
