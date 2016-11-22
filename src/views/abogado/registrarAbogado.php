@@ -29,7 +29,7 @@
 
   <!-- Tab panes -->
   <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="home">
+      <div role="tabpanel" class="tab-pane active" id="abogado">
           
                     <div class="box-body">
                         <div class="row">
@@ -121,14 +121,14 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <a href="#id_especializacion" class="btn btn-primary" data-toggle="tab" aria-expanded="true"
+                        <a href="#especializacion" class="btn btn-primary" data-toggle="tab" aria-expanded="true"
                            id="ctrl-tabs">Continuar</a>
                     </div>
       </div> 
       
       
       
-      <div role="tabpanel" class="tab-pane" id="profile">
+      <div role="tabpanel" class="tab-pane" id="especializacion">
           <div class="box-body">
                         <div class="row">
                             <div class="col-md-6">
