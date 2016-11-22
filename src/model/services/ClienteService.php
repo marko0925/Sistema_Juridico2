@@ -1,39 +1,42 @@
 <?php
-/**
- * 
- */
-require_once __DIR__.'/../factory/TransactionManager.php';
-class ClienteService{
+require_once __DIR__ . '/../factory/TransactionManager.php';
 
-    public function registrar(){
-           try {
-           //manager transaction
-           $transaccion = new TransactionManager();
-           $transaccion->beginTransaction();
-           /**
-            * @var UsuarioDAO $usuarioDAO
-            */
-           $usuarioDAO=$transaccion->getDAO('UsuarioDAO');
-           $usuarioDAO->saved();
-           $usuarioDAO->
-           //guardar
-           $transaccion->flush();
-       }
-       catch (Exception $e){
-           if(isset($transaccion)){
-               //eliminar transaction
-               $transaccion->rollback();
-           }
-       }
-    }
-    
-    public function listar(){
-        try{
-            $manager = new  TransactionManager(true);
-            $dao=$manager->getDAO('ClienteDAO');
+class ClienteService
+{
+
+    public function registrar($dto)
+    {
+        try {
+            //manager transaction
+            $manager = new TransactionManager(true);
+            /**
+             * @var ClienteDAO
+             */
+            $dao = $manager->getDAO('ClienteDAO');
+            $dao->registrar($dto);
+            //guardar
+            $manager->flush();
+        } catch (Exception $e) {
+            print $e;
+            if (isset($manager)) {
+                //eliminar transaction
+                $manager->rollback();
+            }
+        } finally {
+            if (isset($manager)) {
+                $manager->close();
+            }
+
         }
-        finally{
-            if(!isset($manager)){
+    }
+
+    public function listar()
+    {
+        try {
+            $manager = new  TransactionManager(true);
+            $dao = $manager->getDAO('ClienteDAO');
+        } finally {
+            if (isset($manager)) {
                 $manager->close();
             }
         }
