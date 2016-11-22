@@ -1,8 +1,10 @@
 <?php
-  /**
-   *
-   */
-  class PersonaDTO{
+
+/**
+ *
+ */
+class PersonaDTO
+{
     private $dni;
     private $nombre;
     private $apellido;
@@ -10,62 +12,70 @@
     private $fecha_nac;
     private $telefono;
 
-    function __construct($dni=null,$nombre=null, $apellido=null, $correo=null, $fecha_nac=null, $telefono=null){
-      $this->dni = $dni;
-      $this->nombre = $nombre;
-      $this->apellido = $apellido;
-      $this->correo = $correo;
-      $this->fecha_nac = $fecha_nac;
-      $this->telefono = $telefono;
+    function __construct($dni = null, $nombre = null, $apellido = null, $correo = null, $fecha_nac = null, $telefono = null)
+    {
+
     }
 
-    function getDni() {
+    function getDni()
+    {
         return $this->dni;
     }
 
-    function getNombre() {
+    function getNombre()
+    {
         return $this->nombre;
     }
 
-    function getApellido() {
+    function getApellido()
+    {
         return $this->apellido;
     }
 
-    function getCorreo() {
+    function getCorreo()
+    {
         return $this->correo;
     }
 
-    function getFecha_nac() {
+    function getFecha_nac()
+    {
         return $this->fecha_nac;
     }
 
-    function getTelefono() {
+    function getTelefono()
+    {
         return $this->telefono;
     }
 
-    function setDni($dni) {
+    function setDni($dni)
+    {
         $this->dni = $dni;
     }
 
-    function setNombre($nombre) {
+    function setNombre($nombre)
+    {
         $this->nombre = $nombre;
     }
 
-    function setApellido($apellido) {
+    function setApellido($apellido)
+    {
         $this->apellido = $apellido;
     }
 
-    function setCorreo($correo) {
+    function setCorreo($correo)
+    {
         $this->correo = $correo;
     }
 
-    function setFecha_nac($fecha_nac) {
+    function setFecha_nac($fecha_nac)
+    {
         $this->fecha_nac = $fecha_nac;
     }
 
-    function setTelefono($telefono) {
+    function setTelefono($telefono)
+    {
         $this->telefono = $telefono;
     }
 
 
-  }
+}
