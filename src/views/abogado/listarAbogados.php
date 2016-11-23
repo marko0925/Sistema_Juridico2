@@ -88,6 +88,6 @@
 </div>
 <script>
     $('#lista-abogados').DataTable({
-        "ajax": "abogado/listarAbogados"
+        "ajax": "abogado/datosAbogados"
     });
 </script>

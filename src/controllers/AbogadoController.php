@@ -33,19 +33,26 @@ class AbogadoController extends BaseController
      */
     public function getlistarAbogados()
     {
+
+        $this->setView("abogado/listarAbogados");
+    }
+
+    /**
+     * json de los abogados registrados
+     */
+    public function getDatosAbogados()
+    {
         $service = new AbogadoService();
         // retona un listadoAbogado<AbogadoDTO> forma de rrecorrer el array
         // foreach($listadoAbogado as $itemArray){
-        //  $itemArray->metodoGet(); 
+        //  $itemArray->metodoGet();
         //}
         $listadoAbogados = $service->listado();
-        //forma json 
+        //forma json
 
         $json = json_encode($listadoAbogados);
-        echo $json;
-        //y eliminar setView();
+        return $json;
 
-        $this->setView("abogado/listarAbogados", $listadoAbogados);
     }
 
     /**
