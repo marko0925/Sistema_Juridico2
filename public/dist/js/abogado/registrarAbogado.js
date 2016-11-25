@@ -35,7 +35,6 @@ function anadirEspec(){
     ]).draw();
 
 
-    // Automatically add a first row of data
 }
 
 function RAbogado() {
@@ -49,5 +48,10 @@ function RAbogado() {
     var telefono = $("input[name=txtTelefonoAbogado]").val();
     var alma = $("input[name=txtAlmamaterAbogado]").val();
     var especialidades = $("#tabla-especialidades").dataTable().fnGetData();
-    console.log(especialidades);
+    $.post("abogado/asdRegistrar",{name : "Marlon"}).done(function(data){
+       alert("done!");
+    }).always(function(data){
+        alert("finished");
+    });
+
 }

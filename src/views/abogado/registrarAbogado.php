@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <!-- general form elements -->
-   <!-- <form role="form" action="#" method="post" novalidate>-->
+    <form role="form" action="abogado/registrar" method="post" onsubmit=" return RAbogado()" novalidate>
         <div class="nav-tabs-custom">
             <!--
             <ul id="ml-tah" class="nav nav-tabs">
@@ -235,8 +235,8 @@
                 </div>
             </div>
         </div>
-        <input type="button" onclick="RAbogado()" class="btn btn-lg btn-primary" value="Registrar">
-   <!-- </form>-->
+        <input type="submit"  class="btn btn-lg btn-primary" value="Registrar">
+    </form>
 
 </div>
 
