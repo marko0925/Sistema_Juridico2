@@ -1,12 +1,6 @@
 <?php
-
-/**
- * Created by PhpStorm.
- * User: miguel
- * Date: 16/11/2016
- * Time: 3:54 PM
- */
 require_once __DIR__.'/../../library/core/BaseController.php';
+require_once __DIR__.'/../model/services/ProcesoService.php';
 class ProcesoController extends BaseController
 {
     public  function __construct()
@@ -17,5 +11,38 @@ class ProcesoController extends BaseController
     public function getFormularioRegistro(){
         $this->setView('proceso/formularioRegistroProceso');
     }
+
+    public function getListarCitas(){
+        require_once __DIR__.'/../model/dto/CitaDTO.php';
+        $service= new ProcesoService();
+        $json= json_encode($service->listarCitas());
+        echo $json;
+    }
+    public function getRegistrarCita(){
+        require_once __DIR__.'/../model/dto/CitaDTO.php';
+        $dtoCita= new CitaDTO();
+        $dtoCita->setAsunto('reunion importante');
+        $dtoCita->setFecha('1-3-2018');
+        $service= new ProcesoService();
+        $service->registrarCita($dtoCita,4,3);
+    }
+
+    public function getListarObservaciones(){
+        $service = new ProcesoService();
+        //id del abogado al que le pertenecen las observaciones
+        $json=json_encode($service->listarObservaciones(4));
+        echo $json;
+
+    }
+    public function getRegistrarObservacion(){
+        require_once __DIR__.'/../model/dto/ObservacionDTO.php';
+        $dto = new ObservacionDTO();
+        $dto->setNombre('nota prueba');
+        $dto->setNota('kjfjhfhjfhfkhfkhfkjfkhfhfbf');
+        $dto->setFecha('1-3-2018');
+        $service = new ProcesoService();
+        $service->registrarObservacion($dto,4,3);
+    }
+
 
 }

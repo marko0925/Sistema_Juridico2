@@ -42,6 +42,7 @@ class AbogadoDAO
     /**
      * Metodo- actualiza los datos del abogado en la base de datos
      * @param AbogadoDTO $dto
+     * @return boolean
      */
     public function actualizar($dto){
         $estado=false;
@@ -67,15 +68,7 @@ class AbogadoDAO
         $listado=  array();
         $daoEspecialidad= new EspecialidadDAO($this->con);
         foreach ($resultSet as $row){
-            $dto= new AbogadoDTO();
-            $dto->setDni($row['_dni']);
-            $dto->setApellido($row['_apellido']);
-            $dto->setNombre($row['_nombre']);
-            $dto->setCorreo($row['_correo']);
-            $dto->setFecha_nac($row['_fecha_nac']);
-            $dto->setTelefono($row['_telefono']);
-            $dto->setAlmamater($row['_almamater']);
-            $this->especialidad($daoEspecialidad,$dto);
+            $dto=$this->getAbogadoDTO($row['_dni'],$row['_apellido'],$row['_nombre'],$row[0]['_correo'],$row['_fecha_nac'],$row['_telefono'],$row['_almamater'],$daoEspecialidad);
             $listado[]=$dto;
         }
         return $listado;
@@ -84,4 +77,31 @@ class AbogadoDAO
       $dtoEspecialidad=$daoEspecialidad->findBy($dto->getDni());
       $dto->setEspecialidad($dtoEspecialidad);
     }
+
+    private function getAbogadoDTO($dni,$nombre,$apellido,$correo,$fechaN,$telefono,$almamater,$dao){
+        $dto= new AbogadoDTO();
+        $dto->setDni($dni);
+        $dto->setApellido($apellido);
+        $dto->setNombre($nombre);
+        $dto->setCorreo($correo);
+        $dto->setFecha_nac($fechaN);
+        $dto->setTelefono($telefono);
+        $dto->setAlmamater($almamater);
+        $dto->setEspecialidad($this->especialidad($dao,$dto));
+        return $dto;
+    }
+    public function buscar($idAbogado){
+        $sql='SELECT p._dni,p._nombre,p._apellido,p._correo,p._fecha_nac,p._telefono,a._almamater FROM  _abogado a INNER JOIN _persona p ON a._dni_abogado=p._dni WHERE p._dni= ? ';
+        $parametros=array($idAbogado);
+        $result=$this->con->findByOne($sql,$parametros);
+        $dto=null;
+        if($result!==null){
+            require_once __DIR__.'/EspecialidadDAO.php';
+            $dao= new EspecialidadDAO($this->con);
+            $dto= $this->getAbogadoDTO($result['_dni'],$result['_apellido'],$result['_nombre'],$result['_correo'],$result['_fecha_nac'],$result['_telefono'],$result['_almamater'],$dao);
+        }
+        return $dto;
+    }
+
+
 }

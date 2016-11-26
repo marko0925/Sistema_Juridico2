@@ -32,6 +32,7 @@ class ClienteDAO{
     }
 
     /**
+     * Metodo- registra en la base de datos un cliente
      * @param ClienteDTO $dto
      * @return boolean
      */
@@ -45,5 +46,18 @@ class ClienteDAO{
             $estado=$this->con->save($sql,$parametros);
         }
         return $estado;
+    }
+
+    /**
+     * Metodo- modifica los datos de un cliente en la base de datos
+     * @param ClienteDTO $dto
+     * @return boolean
+     */
+    public function actualizar($dto){
+        $sql='UPDATE _persona SET _apellido= ?,_nombre= ?,_fecha_nac= ?,_telefono= ?,_correo= ? WHERE _dni= ?';
+        $parametros=array($dto->getApellido(),$dto->getNombre(),$dto->getFecha_nac(), $dto->getTelefono(),$dto->getCorreo(),$dto->getDni());
+        $estado=$this->con->save($sql,$parametros);
+        return $estado;
+
     }
 }

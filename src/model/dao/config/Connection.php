@@ -94,4 +94,19 @@ class Connection extends PDO
         return $result;
     }
 
+    /**
+     * Metodo - obtiene solo la primera fila de un select
+     * @param string $query
+     * @param array $parametros
+     * @return mixed|null
+     */
+    public function findByOne($query,$parametros){
+        $result=null;
+        $statement = $this->prepare($query);
+        $statement->execute($parametros);
+        $result=$statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+
+    }
+
 }

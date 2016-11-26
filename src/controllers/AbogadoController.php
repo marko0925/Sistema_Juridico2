@@ -34,12 +34,7 @@ class AbogadoController extends BaseController
     public function getlistarAbogados()
     {
         $service = new AbogadoService();
-        // retona un listadoAbogado<AbogadoDTO> forma de rrecorrer el array
-        // foreach($listadoAbogado as $itemArray){
-        //  $itemArray->metodoGet(); 
-        //}
         $listadoAbogados = $service->listado();
-        //forma json 
 
         $json = json_encode($listadoAbogados);
         echo $json;
