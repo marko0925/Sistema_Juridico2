@@ -56,6 +56,9 @@ class AbogadoDTO extends PersonaDTO implements JsonSerializable
         $this->almamater = $almamater;
     }
 
+    public function agregarEspecialidad($espec){
+        $this->especialidad[] = $espec;
+    }
     /**
      * Metodo- sirve para convetir un objeto con atributos privados en una cadena con formato json usando el metodo json_encode
      * @return array

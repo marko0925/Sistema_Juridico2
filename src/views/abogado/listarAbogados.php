@@ -7,47 +7,73 @@
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 
 
-                <div class="col-sm-12">
+            <div class="col-sm-12">
 
-                    <table id="lista-abogados" class="table table-bordered table-striped dataTable" role="grid"
-                           aria-describedby="example1_info">
-                        <thead>
-                        <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 177px;">DNI
-                            </th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                aria-label="Browser: activate to sort column ascending" style="width: 224px;">Nombre
-                            </th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                aria-label="Platform(s): activate to sort column ascending" style="width: 205px;">
-                                Apellido
-                            </th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                aria-label="Engine version: activate to sort column ascending" style="width: 152px;">
-                                Correo
-                            </th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">Telefono
-                            </th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">Fecha
-                                Nacimiento
-                            </th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">
-                                Especialidad
-                            </th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">
-                                Almamater
-                            </th>
-                        </tr>
-                        </thead>
+                <table id="lista-abogados" class="table table-bordered table-striped dataTable" role="grid"
+                       aria-describedby="example1_info">
+                    <thead>
+                    <tr role="row">
+                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                            style="width: 177px;">DNI
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="Browser: activate to sort column ascending" style="width: 224px;">Nombre
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="Platform(s): activate to sort column ascending" style="width: 205px;">
+                            Apellido
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="Engine version: activate to sort column ascending" style="width: 152px;">
+                            Correo
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">Telefono
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">Fecha
+                            Nacimiento
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">
+                            Especialidad
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">
+                            Almamater
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
 
-                    </table>
-                </div>
+                    foreach ($listadoAbogados as $dto) {
+                        echo `<tr role="row" class="odd">
+                            <td class="sorting_1"></td>
+                            <td>` + $dto->getDni();
+                        +`</td>
+                            <td>` + $dto->getNombre();
+                        +`</td>
+                            <td>` + $dto->getApellido();
+                        +`</td>
+                            <td>` + $dto->getCorreo();
+                        +`</td>
+                            <td>` + $dto->getTelefono();
+                        +`</td>
+                            <td>` + $dto->getFecha_nac();
+                        +`</td>
+
+                         <td>` + $dto->getAlmamater();
+                        +`</td>
+                        </tr>`;
+                    }
+
+                    ?>
+
+                    </tbody>
+                </table>
+            </div>
 
             <!--<div class="row">
                  <div class="col-sm-5">
@@ -87,7 +113,5 @@
     <!-- /.box-body -->
 </div>
 <script>
-    $('#lista-abogados').DataTable({
-        "ajax": "abogado/listarAbogados"
-    });
+
 </script>

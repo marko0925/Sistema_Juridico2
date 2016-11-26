@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <!-- general form elements -->
-    <form role="form" action="abogado/registrar" method="post" novalidate>
+    <form role="form" action="abogado/registrar" method="post" onsubmit=" return RAbogado()" novalidate>
         <div class="nav-tabs-custom">
             <!--
             <ul id="ml-tah" class="nav nav-tabs">
@@ -69,7 +69,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">ContraseÃ±a</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1"
+                                    <input type="password" class="form-control" name="txtPassAbogado"
+                                           id="exampleInputPassword1"
                                            placeholder="Digita la contraseÃ±a">
                                 </div>
                             </div>
@@ -168,37 +169,59 @@
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <div class="box">
-                                    <div class="box-header">
-                                        <h3 class="box-title">Especialidades</h3>
 
-                                    </div>
-                                    <!-- /.box-header -->
-                                    <div class="box-body table-responsive no-padding">
-                                        <table class="table table-hover" id="tabla-especialidades">
-                                            <thead>
-                                            <tr>
-                                                <th>Nombre</th>
-                                                <th>Fecha</th>
-                                                <th>Universidad/Instituto</th>
-                                                <th>Acta</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
+                                <!-- Large modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#modal-especialidades" style="margin-top: 1.3em;">
+                                    Ver especialidades.
+                                </button>
 
-                                            <tr>
-                                                <td>Abogado Penalista</td>
-                                                <td>11-7-2014</td>
-                                                <td>Universidad Francisco de Paula Santander</td>
-                                                <td>Criminal Lawyer.pdf</td>
-                                            </tr>
+                                <div class="modal  fade" id="modal-especialidades" tabindex="-1" role="dialog"
+                                     aria-labelledby="gridSystemModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <h4 class="modal-title" id="gridSystemModalLabel">Especialidades</h4>
+                                            </div>
+                                            <div class="modal-body">
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- /.box-body -->
-                                </div>
-                                <!-- /.box -->
+                                                <!-- /.box-header -->
+                                                <table class="table table-hover" id="tabla-especialidades">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Nombre</th>
+                                                        <th>Fecha</th>
+                                                        <th>Universidad/Instituto</th>
+                                                        <th>Acta</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    <tr>
+                                                        <td>Abogado Penalista</td>
+                                                        <td>11-7-2014</td>
+                                                        <td>Universidad Francisco de Paula Santander</td>
+                                                        <td>Criminal Lawyer.pdf</td>
+                                                    </tr>
+
+                                                    </tbody>
+                                                </table>
+                                                <!-- /.box-body -->
+                                                <!-- /.box -->
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                    Cerrar
+                                                </button>
+
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+
                             </div>
 
                         </div>
@@ -212,7 +235,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-lg btn-primary">Registrar</button>
+        <input type="submit"  class="btn btn-lg btn-primary" value="Registrar">
     </form>
 
 </div>
