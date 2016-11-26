@@ -42,7 +42,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Contraseña</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1"
+                            <input type="password" class="form-control" name="txtPassCliente" id="exampleInputPassword1"
                                    placeholder="Digita la contraseña">
                         </div>
                     </div>

@@ -17,27 +17,44 @@ class ClienteController extends BaseController
     }
 
 
-    public function getRegistrarCliente(){
+    public function getFormularioRegistrarCliente(){
         $this->setView("cliente/registrarCliente");
     }
+    public function getListadoClientes(){
+
+        $this->setView("cliente/listarClientes");
+    }
+
     // sirve
     public function getListarClientes(){
         $servicio = new ClienteService();
         $listadoDTO=$servicio->listar();
-        $this->setView("cliente/listarClientes",array('listadoDTO'=>$listadoDTO));
+        $json='{ "data" : ';
+        $json .= '[{"dni" : "0925","nombre" : "Marlon", "apellido" : "Coronel","correo" : "marlon@gmail.com","telefono" : 5762777,"fechaNac" : "06/04/15"}]';
+        $json.='}';
+        echo $json;
     }
     //sirve
     public function postRegistrar()
     {
+        $dni = $_POST["dni"];
+        $nombre = $_POST["nombre"];
+        $apellido = $_POST["apellido"];
+        $correo = $_POST["correo"];
+        $fecha_nac = $_POST["fechaNac"];
+        $telefono = $_POST["telefono"];
+
+
         require_once __DIR__.'/../model/dto/ClienteDTO.php';
+
          // @type UsuarioDTO
          $dto= new ClienteDTO();
-         $dto->setDni(7);
-         $dto->setApellido('coronel correa');
-         $dto->setNombre('marlon yesid');
-         $dto->setCorreo('marlonyasid09@gmail.com');
-         $dto->setFecha_nac('2-4-2011');
-         $dto->setTelefono('123456');
+         $dto->setDni($dni);
+         $dto->setApellido($apellido);
+         $dto->setNombre($nombre);
+         $dto->setCorreo($correo);
+         $dto->setFecha_nac($fecha_nac);
+         $dto->setTelefono($telefono);
          
          $servicio= new ClienteService();
          $servicio->registrar($dto);

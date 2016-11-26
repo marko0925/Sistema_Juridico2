@@ -8,7 +8,7 @@
 
             <div class="row">
                 <div class="col-sm-12">
-                    <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
+                    <table id="lista-clientes" class="table table-bordered table-striped dataTable" role="grid"
                            aria-describedby="example1_info">
                         <thead>
                         <tr role="row">
@@ -38,34 +38,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php
-                        foreach ($listadoDTO as $dto) {
-                            echo `<tr role="row" class="odd">
-                            <td class="sorting_1"></td>
-                            <td>` + $dto->getDni();
-                            +`</td>
-                            <td>` + $dto->getNombre();
-                            +`</td>
-                            <td>` + $dto->getApellido();
-                            +`</td>
-                            <td>` + $dto->getCorreo();
-                            +`</td>
-                            <td>` + $dto->getTelefono();
-                            +`</td>
-                            <td>` + $dto->getFecha_nac();
-                            +`</td>
-                        </tr>`;
-                        }
-                        ?>
 
 
-                        <tr role="row" class="even">
-                            <td class="sorting_1">Algo</td>
-                            <td>Firefox 1.0</td>
-                            <td>Win 98+ / OSX.2+</td>
-                            <td>1.7</td>
-                            <td>A</td>
-                        </tr>
 
 
                         </tbody>
@@ -110,3 +84,16 @@
     </div>
     <!-- /.box-body -->
 </div>
+<script>
+    $("#lista-clientes").DataTable({
+        ajax : "cliente/listarClientes",
+        columns :[
+            {data : "dni"},
+            {data : "nombre"},
+            {data : "apellido"},
+            {data : "correo"},
+            {data : "telefono"},
+            {data : "fechaNac"}
+        ]
+    })
+</script>

@@ -6,5 +6,5 @@
  */
 $("#listarAbogado").on("click",function () {
     $(".content-header").html("<h1>Abogados Registrados</h1>");
-    abrirVista("abogado/listarAbogados");
+    abrirVista("abogado/listadoAbogados");
 });

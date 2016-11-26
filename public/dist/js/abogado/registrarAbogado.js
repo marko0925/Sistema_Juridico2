@@ -6,7 +6,7 @@
  */
 $("#registrarAbogado").on("click", function () {
     $(".content-header").html("<h1>Registro de Abogado</h1>");
-    abrirVista("abogado/registrarAbogado");
+    abrirVista("abogado/formularioRegistrarAbogado");
 });
 
 
@@ -20,7 +20,7 @@ $("#ctrl-tabs").on("click", function () {
 /**
  * Se encarga de añadir especializacion a la tabla
  */
-function anadirEspec(){
+function anadirEspec() {
     var nombre = $("input[name=txtEspecialidadAbogado]").val();
     var fecha = $("input[name=txtFechaActaAbogado]").val();
     var universidad = $("input[name= txtUniversidadActaAbogado]").val();
@@ -43,15 +43,20 @@ function RAbogado() {
     var apellido = $("input[name=txtApellidoAbogado]").val();
     var correo = $("input[name=txtCorreoAbogado]").val();
     var clave = $("input[name=txtPassAbogado]").val();
-    console.log(clave);
     var fechaNac = $("input[name=txtFechaNacimientoAbogado]").val();
     var telefono = $("input[name=txtTelefonoAbogado]").val();
     var alma = $("input[name=txtAlmamaterAbogado]").val();
     var especialidades = $("#tabla-especialidades").dataTable().fnGetData();
-    $.post("abogado/asdRegistrar",{name : "Marlon"}).done(function(data){
-       alert("done!");
-    }).always(function(data){
-        alert("finished");
+    console.log(JSON.stringify(especialidades));
+    $.ajax({
+        type: "POST",
+        url: "abogado/registrar",
+        data: {dni: dni, nombre: nombre, apellido: apellido, correo: correo, clave: clave,fechaNac : fechaNac,telefono : telefono,almamater: alma,especialidades:especialidades},
+        success: function (data) {
+            alert(data);
+        },
+        error : function (err) {
+            alert("¡Ups! Algo ha ido mal.");
+        }
     });
-
 }

@@ -20,30 +20,32 @@ class AbogadoController extends BaseController
         parent::__construct();
     }
 
-    /**
-     *estos deberia llamarse "getFormularioRegistro" por que hay no se registra nada ¬¬
-     */
-    public function getRegistrarAbogado()
-    {
+    public function getFormularioRegistrarAbogado(){
         $this->setView("abogado/registrarAbogado");
     }
-
     /**
      *
      */
-    public function getlistarAbogados()
+    public function getlistadoAbogados()
     {
+
+        $this->setView("abogado/listarAbogados");
+    }
+
+    public function getListarAbogados()
+    {
+
         $service = new AbogadoService();
         // retona un listadoAbogado<AbogadoDTO> forma de rrecorrer el array
         // foreach($listadoAbogado as $itemArray){
         //  $itemArray->metodoGet();
         //}
         $listadoAbogados = $service->listado();
-
-        $this->setView("abogado/listarAbogados",array("listadoAbogados"=>$listadoAbogados));
+        $json = '{"data" : ';
+        $json .= json_encode($listadoAbogados);
+        $json .= '}';
+        echo $json;
     }
-
-
 
     /**
      *
@@ -51,25 +53,28 @@ class AbogadoController extends BaseController
     public function postRegistrar()
     {
 
-        $dni = $_POST["txtDniAbogado"];
-        $nombre = $_POST["txtNombreAbogado"];
-        $apellido = $_POST["txtApellidoAbogado"];
-        $correo = $_POST["txtCorreoAbogado"];
-        $fecha_nac = $_POST["txtFechaNacimientoAbogado"];
-        $telefono = $_POST["txtTelefonoAbogado"];
-        $especialidad = $_POST["txtEspecialidadAbogado"];
-        $almamater = $_POST["txtAlmamaterAbogado"];
+        $dni = $_POST["dni"];
+        $nombre = $_POST["nombre"];
+        $apellido = $_POST["apellido"];
+        $correo = $_POST["correo"];
+        $fecha_nac = $_POST["fechaNac"];
+        $telefono = $_POST["telefono"];
+        $especialidad = $_POST["especialidades"];
+        $almamater = $_POST["almamater"];
 
         $dto = new AbogadoDTO();
 
-        $dto->setDni(5);
-        $dto->setApellido('jghf kljff');
-        $dto->setNombre('kjjfnf klfjjf');
-        $dto->setCorreo('nmvnnm@gmail.com');
-        $dto->setFecha_nac('1-3-2018');
-        $dto->setTelefono('009032');
-        $dto->setAlmamater('udes');
+        $dto->setDni($dni);
+        $dto->setApellido($nombre);
+        $dto->setNombre($apellido);
+        $dto->setCorreo($correo);
+        $dto->setFecha_nac($fecha_nac);
+        $dto->setTelefono($telefono);
+        $dto->setAlmamater($almamater);
         //especialidades abogado
+        foreach ($especialidad as $espec) {
+
+        }
         $dtoEspecialidad1 = new EspecialidadDTO();
         $dtoEspecialidad1->setNombre('matrimonio');
         $dtoEspecialidad2 = new EspecialidadDTO();
@@ -79,7 +84,7 @@ class AbogadoController extends BaseController
         // servicio contiene la logica de negocio
         $serviceAbogado = new AbogadoService();
         $serviceAbogado->registrar($dto);
-
+        echo "Good!";
     }
 
     // en proceso de prueba creo que no sirve

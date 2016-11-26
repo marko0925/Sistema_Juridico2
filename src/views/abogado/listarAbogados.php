@@ -35,10 +35,7 @@
                             aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">Fecha
                             Nacimiento
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">
-                            Especialidad
-                        </th>
+
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">
                             Almamater
@@ -46,30 +43,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php
 
-                    foreach ($listadoAbogados as $dto) {
-                        echo `<tr role="row" class="odd">
-                            <td class="sorting_1"></td>
-                            <td>` + $dto->getDni();
-                        +`</td>
-                            <td>` + $dto->getNombre();
-                        +`</td>
-                            <td>` + $dto->getApellido();
-                        +`</td>
-                            <td>` + $dto->getCorreo();
-                        +`</td>
-                            <td>` + $dto->getTelefono();
-                        +`</td>
-                            <td>` + $dto->getFecha_nac();
-                        +`</td>
-
-                         <td>` + $dto->getAlmamater();
-                        +`</td>
-                        </tr>`;
-                    }
-
-                    ?>
 
                     </tbody>
                 </table>
@@ -112,6 +86,10 @@
     </div>
     <!-- /.box-body -->
 </div>
-<script>
 
+<script>
+    $("#lista-abogados").DataTable({
+        ajax: "abogado/listarAbogados",
+        columns: [{data: "dni"}, {data: "nombre"}, {data: "apellido"}, {data: "fechaNacimiento"}, {data: "telefono"}, {data: "email"}, {data: "almamater"}]
+    });
 </script>
