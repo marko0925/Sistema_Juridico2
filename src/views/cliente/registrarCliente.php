@@ -5,7 +5,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="cliente/registrar" method="post">
+        <!--<form role="form" action="cliente/registrar" method="post">-->
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-3">
@@ -84,8 +84,9 @@
             <!-- /.box-body -->
 
             <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Registrar</button>
+                <button  id="RCliente" class="btn btn-primary" onclick="RCliente()">Registrar</button>
+                <button hidden id="ACliente" class="btn btn-primary" onclick="ACliente()">Actualizar</button>
             </div>
-        </form>
+      <!--  </form>-->
     </div>
 </div>

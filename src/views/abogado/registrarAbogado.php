@@ -51,9 +51,7 @@
                             <div class="form-group">
                                 <label>Apellido</label>
                                 <input required type="text" class="form-control" name="txtApellidoAbogado"
-                                       placeholder="Digita el apellido" value="<?php if (isset($abogado)) {
-                                    echo $abogado->getApellido();
-                                } ?>">
+                                       placeholder="Digita el apellido" value="">
                             </div>
                         </div>
                     </div>
@@ -63,9 +61,7 @@
                                 <label for="exampleInputEmail1">Correo</label>
                                 <input required type="email" class="form-control" name="txtCorreoAbogado"
                                        id="exampleInputEmail1"
-                                       placeholder="Digita el correo" value="<?php if (isset($abogado)) {
-                                    echo $abogado->getCorreo();
-                                } ?>">
+                                       placeholder="Digita el correo" value="">
                             </div>
 
 
@@ -92,9 +88,7 @@
                                     </div>
                                     <input required type="text" class="form-control pull-right"
                                            name="txtFechaNacimientoAbogado" id="datepicker"
-                                           value="<?php if (isset($abogado)) {
-                                               echo $abogado->getFecha_nac();
-                                           } ?>">
+                                           value="">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -109,9 +103,7 @@
                                     </div>
                                     <input required type="text" class="form-control"
                                            name="txtTelefonoAbogado"
-                                           class="phone_us" value="<?php if (isset($abogado)) {
-                                        echo $abogado->getTelefono();
-                                    } ?>">
+                                           class="phone_us" value="">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -123,9 +115,7 @@
                                 <label>Almamater</label>
                                 <input required type="text" class="form-control"
                                        placeholder="Universidad de pregrado" name="txtAlmamaterAbogado"
-                                       value="<?php if (isset($abogado)) {
-                                           echo $abogado->getFecha_nac();
-                                       } ?>">
+                                       value="">
                             </div>
                         </div>
 
@@ -241,11 +231,8 @@
             </div>
         </div>
     </div>
-    <?php if (!isset($abogado)){
-        echo '<input type="button" class="btn btn-lg btn-primary" onclick="RAbogado()" value="Registrar">';
-    }else{
-       echo '<input type="button" class="btn btn-lg btn-primary" onclick="actualizarA()" value="Actualizar">';
-    } ?>
+    <input id="RAbogado" type="button" class="btn btn-lg btn-primary" onclick="RAbogado()" value="Registrar" style="" >
+    <input  id="AAbogado" type="button" class="btn btn-lg btn-primary" onclick="actualizarA()" value="Actualizar" style="display: none;">
 
     <!--<input type="submit" class="btn btn-lg btn-primary" value="Registrar">
 </form>-->

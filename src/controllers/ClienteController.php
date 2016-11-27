@@ -62,6 +62,9 @@ class ClienteController extends BaseController
          $servicio->registrar($dto);
     }
 
+    public function postActualizar(){
+
+    }
     public function getPruebaConexion()
     {
         // @type UsuarioDTO

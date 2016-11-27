@@ -11,11 +11,28 @@ class PersonaDTO
     private $correo;
     private $fecha_nac;
     private $telefono;
-
+    private $clave;
     function __construct($dni = null, $nombre = null, $apellido = null, $correo = null, $fecha_nac = null, $telefono = null)
     {
 
     }
+
+    /**
+     * @return mixed
+     */
+    public function getClave()
+    {
+        return $this->clave;
+    }
+
+    /**
+     * @param mixed $clave
+     */
+    public function setClave($clave)
+    {
+        $this->clave = $clave;
+    }
+
 
     function getDni()
     {

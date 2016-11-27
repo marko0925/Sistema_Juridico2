@@ -3,7 +3,7 @@
  * formulario de listar clientes
  */
 $("#listarCliente").on("click",function () {
-    $(".content-header").html("<h1>Clientes registrados</h1>");
+    $("#contenido-cabecera").html("<h1>Clientes registrados</h1>");
     abrirVista("cliente/listadoClientes");
 });
 /**

@@ -46,7 +46,14 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <section class="content-header">
+            <div class="row">
+                <div class="col-md-4" id="contenido-cabecera">
 
+                </div>
+                <div class="col-md-8" id="msj">
+
+                </div>
+            </div>
         </section>
         <section class="content">
 
