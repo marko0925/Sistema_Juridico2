@@ -36,8 +36,7 @@ function anadirEspec() {
 
 
 }
-
-function RAbogado() {
+function tomarInfo() {
     var dni = $("input[name=txtDniAbogado]").val();
     var nombre = $("input[name=txtNombreAbogado]").val();
     var apellido = $("input[name=txtApellidoAbogado]").val();
@@ -47,15 +46,39 @@ function RAbogado() {
     var telefono = $("input[name=txtTelefonoAbogado]").val();
     var alma = $("input[name=txtAlmamaterAbogado]").val();
     var especialidades = $("#tabla-especialidades").dataTable().fnGetData();
-    console.log(JSON.stringify(especialidades));
+    especialidades = JSON.stringify(especialidades);
+    return {
+        dni: dni,
+        nombre: nombre,
+        apellido: apellido,
+        correo: correo,
+        clave: clave,
+        fechaNac: fechaNac,
+        telefono: telefono,
+        almamater: alma,
+        especialidades: especialidades
+    };
+}
+function actualizarA() {
+
+    var info = tomarInfo();
+    $.ajax({
+        type : "POST",
+        url : "abogado/actualizar",
+        data : info
+    });
+}
+function RAbogado() {
+    var info = tomarInfo();
+
     $.ajax({
         type: "POST",
         url: "abogado/registrar",
-        data: {dni: dni, nombre: nombre, apellido: apellido, correo: correo, clave: clave,fechaNac : fechaNac,telefono : telefono,almamater: alma,especialidades:especialidades},
+        data: info,
         success: function (data) {
-            alert(data);
+            $(".content").html(data);
         },
-        error : function (err) {
+        error: function (err) {
             alert("¡Ups! Algo ha ido mal.");
         }
     });

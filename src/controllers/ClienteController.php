@@ -30,10 +30,12 @@ class ClienteController extends BaseController
         $servicio = new ClienteService();
         $listadoDTO=$servicio->listar();
         $json='{ "data" : ';
-        $json .= '[{"dni" : "0925","nombre" : "Marlon", "apellido" : "Coronel","correo" : "marlon@gmail.com","telefono" : 5762777,"fechaNac" : "06/04/15"}]';
+        $json.=json_encode($listadoDTO);
+       // $json .= '[{"dni" : "0925","nombre" : "Marlon", "apellido" : "Coronel","correo" : "marlon@gmail.com","telefono" : 5762777,"fechaNac" : "06/04/15"}]';
         $json.='}';
         echo $json;
     }
+
     //sirve
     public function postRegistrar()
     {

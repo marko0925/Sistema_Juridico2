@@ -34,12 +34,14 @@
                                 aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">Fecha
                                 Nacimiento
                             </th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                                style="width: 200px;">Actualizar
+                            </th>
 
                         </tr>
                         </thead>
                         <tbody>
-
-
 
 
                         </tbody>
@@ -85,15 +87,22 @@
     <!-- /.box-body -->
 </div>
 <script>
+
     $("#lista-clientes").DataTable({
-        ajax : "cliente/listarClientes",
-        columns :[
-            {data : "dni"},
-            {data : "nombre"},
-            {data : "apellido"},
-            {data : "correo"},
-            {data : "telefono"},
-            {data : "fechaNac"}
-        ]
-    })
+        ajax: "cliente/listarClientes",
+        columns: [
+            {data: "dni"},
+            {data: "nombre"},
+            {data: "apellido"},
+            {data: "correo"},
+            {data: "telefono"},
+            {data: "fechaNac"},
+            {
+                data: null,
+                className: "center",
+                defaultContent: '<button  class="btn btn-primary btn-sm">Modificar</button> &nbsp; <button  class="btn btn-danger btn-sm">Eliminar</button>'
+            }
+        ],
+        select: true
+    });
 </script>

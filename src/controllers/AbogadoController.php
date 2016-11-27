@@ -20,9 +20,13 @@ class AbogadoController extends BaseController
         parent::__construct();
     }
 
-    public function getFormularioRegistrarAbogado(){
-        $this->setView("abogado/registrarAbogado");
+    public function getFormularioRegistrarAbogado()
+    {
+
+            $this->setView('abogado/registrarAbogado');
+
     }
+
     /**
      *
      */
@@ -36,7 +40,7 @@ class AbogadoController extends BaseController
     {
 
         $service = new AbogadoService();
-        // retona un listadoAbogado<AbogadoDTO> forma de rrecorrer el array
+        // retona un listadoAbogado<AbogadoDTO> forma de recorrer el array
         // foreach($listadoAbogado as $itemArray){
         //  $itemArray->metodoGet();
         //}
@@ -72,6 +76,7 @@ class AbogadoController extends BaseController
         $dto->setTelefono($telefono);
         $dto->setAlmamater($almamater);
         //especialidades abogado
+        $especialidad = json_decode($especialidad);
         foreach ($especialidad as $espec) {
 
         }
@@ -84,11 +89,11 @@ class AbogadoController extends BaseController
         // servicio contiene la logica de negocio
         $serviceAbogado = new AbogadoService();
         $serviceAbogado->registrar($dto);
-        echo "Good!";
+        $this->setView("cliente/listarClientes");
     }
 
     // en proceso de prueba creo que no sirve
-    public function getActualizar()
+    public function postActualizar()
     {
         $dto = new AbogadoDTO();
         $dto->setDni(4);

@@ -4,7 +4,7 @@ require_once __Dir__ . '/PersonaDTO.php';
 /**
  *
  */
-class ClienteDTO extends PersonaDTO
+class ClienteDTO extends PersonaDTO implements JsonSerializable
 {
     public function __construct($dni = null, $nombre = null, $apellido = null, $correo = null, $fecha_nac = null, $telefono = null)
     {
@@ -18,9 +18,9 @@ class ClienteDTO extends PersonaDTO
             'dni' => $this->getDni(),
             'apellido' => $this->getApellido(),
             'nombre' => $this->getNombre(),
-            'fechaNacimiento' => $this->getFecha_nac(),
+            'fechaNac' => $this->getFecha_nac(),
             'telefono' => $this->getTelefono(),
-            'email' => $this->getCorreo()
+            'correo' => $this->getCorreo()
         ];
     }
 

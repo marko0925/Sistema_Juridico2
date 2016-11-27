@@ -35,10 +35,13 @@
                             aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">Fecha
                             Nacimiento
                         </th>
-
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">
                             Almamater
+                        </th>
+                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                            style="width: 210px;">Actualizar
                         </th>
                     </tr>
                     </thead>
@@ -88,8 +91,50 @@
 </div>
 
 <script>
-    $("#lista-abogados").DataTable({
-        ajax: "abogado/listarAbogados",
-        columns: [{data: "dni"}, {data: "nombre"}, {data: "apellido"}, {data: "fechaNacimiento"}, {data: "telefono"}, {data: "email"}, {data: "almamater"}]
+    $(document).ready(function () {
+        var tabla = $("#lista-abogados").DataTable({
+            ajax: "abogado/listarAbogados",
+            columns: [{data: "dni"}, {data: "nombre"}, {data: "apellido"}, {data: "fechaNacimiento"}, {data: "telefono"}, {data: "email"}, {data: "almamater"}, {
+                data: null,
+                className: "center",
+                defaultContent: '<button id="modAbogado" class="btn btn-primary btn-sm" >Modificar</button> &nbsp; <button  class="btn btn-danger btn-sm" >Eliminar</button>'
+            }, {data: "especialidad", visible: false}]
+        });
+
+        $('#lista-abogados tbody').on('click', '.btn-primary', function () {
+            var data = tabla.row($(this).parents('tr')).data();
+            $(".content-header").html("<h1>Actualizar Abogado</h1>");
+            $.get("abogado/formularioRegistrarAbogado", function () {
+                console.log('envio solicitud')
+            })
+            //inicia el proceso de lectura o descarga
+                .done(function (data) {
+                    insertHtml('.content', data);
+                })
+                .fail(function () {
+
+                })
+                //termina todos los proceso de $.get
+                //sirve para cargar js a las etiquetas agregadas dinamicamente
+                .always(function () {
+                    $("input[name=txtDniAbogado]").add("disabled", "disabled");
+                    $("input[name=txtDniAbogado]").val(data.dni);
+                    $("input[name=txtNombreAbogado]").val(data.nombre);
+                    $("input[name=txtApellidoAbogado]").val(data.apellido);
+                    $("input[name=txtCorreoAbogado]").val(data.email);
+                    $("input[name=txtPassAbogado").val();
+                    $("input[name=txtFechaNacimientoAbogado]").val(data.fechaNacimiento);
+                    $("input[name=txtTelefonoAbogado]").val(data.telefono);
+                    $("input[name=txtAlmamaterAbogado]").val(data.almamater);
+                    var t = $("#tabla-especialidades").DataTable().rows().data();
+                    console.log(t[0][1]);
+                    for (var i = 0; i < t.length; i++) {
+                        t.row.add([t[i][0], t[i][1], t[i][2], t[i][3]]).draw();
+                    }
+                });
+
+        });
+
     });
+
 </script>
