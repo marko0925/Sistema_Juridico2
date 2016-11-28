@@ -39,4 +39,12 @@ class BaseController{
         }
         return $this->body;
     }
+
+    /**
+     * Redirecciona a otro controlador
+     * @param $url
+     */
+    protected function redirec($url){
+        header ('Location: http://localhost:8081/'.$url);
+    }
 }

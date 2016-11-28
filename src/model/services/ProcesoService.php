@@ -44,6 +44,9 @@ class ProcesoService
             $manager->flush();
         } catch (Exception $e) {
             echo $e->getMessage();
+            if(isset($manager)){
+                $manager->rollback();
+            }
         }
         finally{
             if(isset($manager)){
@@ -69,6 +72,9 @@ class ProcesoService
             $manager->flush();
         } catch (Exception $e) {
             echo $e->getMessage();
+            if(isset($manager)){
+                $manager->rollback();
+            }
         }
         finally{
             if(isset($manager)){
@@ -101,7 +107,40 @@ class ProcesoService
     }
 
     public function registrarExpedientes($listado){
+        try {
+            $manager=new TransactionManager(true);
+            $daoExpediente=$manager->getDAO('ExpedienteDAO');
+            $daoExpediente->registrar($listado);
+            $manager->flush();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+        finally{
+            if(isset($manager)){
+                $manager->close();
+            }
+        }
 
+    }
+
+    /**
+     * Permite guardar un archivo en el servidor
+     * @param $file
+     * @return array
+     */
+    public function subirArchivoExpediente($file){
+        $nombre= basename($file['name']);
+        $directorio = __DIR__.'/../../protected/';
+        $i=0;
+        while (file_exists($directorio.$nombre)){
+            $nombre=$i.''.$nombre;
+            $i++;
+        }
+        if(move_uploaded_file($file['tmp_name'],$directorio)){
+            return array('estado'=>true,'url'=>$directorio);
+        }else{
+            return array('estado'=>false,'url'=>null);
+        }
     }
 
 
