@@ -27,8 +27,8 @@ class PersonaDAO
         $parametros=array($dni);
         $row=$this->con->findByOne($sql,$parametros);
         $dto=null;
-        if($row ==null){
-            $dto= $this->getPersonaDTO($row['_dni'],row['_apellido'],$row['_nombre'],$row['_correo'],$row['_fecha_nac'],$row['_telefono'],$row['_password'],$row['tipo']);
+        if(is_null($dto)){
+            $dto= $this->getPersonaDTO($row['_dni'],$row['_apellido'],$row['_nombre'],$row['_correo'],$row['_fecha_nac'],$row['_telefono'],$row['_password'],$row['_tipo']);
         }
         return $dto;
     }
