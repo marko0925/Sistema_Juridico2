@@ -21,17 +21,24 @@ class  SesionService
             $dto = $dao->buscar($dni);
             if ($dto != null) {
                 // datos correctos
+
                 if ($dto->getPassword() == md5($password) && $dto->getDni() == $dni) {
+
                     session_start('login');
                     //verificamos que la session no exista
                     if (!isset($_SESSION['cuenta'])) {
                         $cuenta = array('rol' => $dto->getTipo(), 'nombre' => $dto->getNombre(), 'apellido' => $dto->getApellido(), 'dni' => $dto->getDni());
                         $_SESSION['cuenta'] = $cuenta;
+                        $estado['estado']=true;
+                        $estado['mensaje']='acceso exitoso';
                     } else {
-                        $estado['mensaje'] = 'password o cuenta inconrrecta';
+                        $estado['estado'] = true;
+                        $estado['mensaje']='ya existe session';
                     }
                 } else {
+                    $estado['estado']=false;
                     $estado['mensaje'] = 'password o cuenta inconrrecta';
+
                 }
             }
         } catch (Exception $e) {
@@ -65,6 +72,7 @@ class  SesionService
     }
 
     public  static function cerrar(){
+        session_start('login');
         return session_destroy();
     }
 
