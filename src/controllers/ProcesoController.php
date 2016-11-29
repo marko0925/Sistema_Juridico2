@@ -1,4 +1,3 @@
-<?php
 require_once __DIR__.'/../../library/core/BaseController.php';
 require_once __DIR__.'/../model/services/ProcesoService.php';
 class ProcesoController extends BaseController
@@ -51,6 +50,7 @@ class ProcesoController extends BaseController
     public function getRegistrarExpedientes(){
         require_once __DIR__.'/../model/dto/ExpedienteDTO.php';
 
+
         $dto1= new ExpedienteDTO();
         $dto1->setDescripcion('esta es una descripcion del documento 1');
         $dto1->setTipoDocumento('solicitud juzgado');
@@ -71,11 +71,15 @@ class ProcesoController extends BaseController
     public function getRegistrarProceso(){
         require_once __DIR__.'/../model/dto/ProcesoDTO.php';
         require_once __DIR__.'/../model/dto/AbogadoCasoDTO.php';
+        require_once __DIR__.'/../model/dto/ClienteDTO.php';
         $dto= new ProcesoDTO();
         $dto->setFechaInicio('1-3-2018');
         $dto->setJuez('fransisco');
         $dto->setFechaFin('1-3-2018');
         $dto->setTipoCaso('familiar');
+        $dto->setRadicado('jgjkkg');
+        $dto->setEstado(true);
+        $dto->setDescripcion('kjffkjjkfjkfjkfjkfjkfjfjjljfjfjf');
         //cliente del proceso
         $dtoCliente= new ClienteDTO();
         $dtoCliente->setDni(2);
@@ -86,7 +90,8 @@ class ProcesoController extends BaseController
         $dtoAbogadoCaso= new AbogadoCasoDTO();
         $dtoAbogadoCaso->setProceso($dto);
         $dtoAbogadoCaso->setAbogado($dtoAbogado);
-
+        $dtoAbogadoCaso->setFechaInicio('1-3-2018');
+        $dtoAbogadoCaso->setFechaFin('1-3-2018');
         $dto->setAbogadoCaso($dtoAbogadoCaso);
         $dto->setCliente($dtoCliente);
 
@@ -101,3 +106,6 @@ class ProcesoController extends BaseController
         $json=json_encode($service->listarProcesos());
         echo $json;
     }
+
+
+}
