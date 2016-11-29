@@ -40,4 +40,20 @@ class AbogadoCasoDAO
 
     }
 
+    /**
+     * @param AbogadoCasoDTO $dto
+     * @return bool
+     */
+    public function registrar($dto){
+        $estado=false;
+        $sql='INSERT INTO _abogado_caso(_id, _dni, _fecha_ini, _fecha_fin) VALUES (?, ?, ?, ?)';
+        $dtoAbogado=$dto->getAbogado();
+        $dtoProceso=$dto->getProceso();
+        $parametros=array($dtoProceso->getIdCaso(),$dtoAbogado->getDni(),$dto->getFechaInicio(),$dto->getFechaFin());
+        if($this->con->save($sql,$parametros)){
+            $estado=true;
+        }
+        return $estado;
+    }
+
 }
