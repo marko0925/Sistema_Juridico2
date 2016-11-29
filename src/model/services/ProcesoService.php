@@ -106,11 +106,11 @@ class ProcesoService
 
     }
 
-    public function registrarExpedientes($listado){
+    public function registrarExpediente($dto){
         try {
             $manager=new TransactionManager(true);
             $daoExpediente=$manager->getDAO('ExpedienteDAO');
-            $daoExpediente->registrar($listado);
+            $daoExpediente->registrar($dto);
             $manager->flush();
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -121,6 +121,23 @@ class ProcesoService
             }
         }
 
+    }
+
+    public function listarExpedientes($idProceso){
+        $listado=null;
+        try {
+            $manager=new TransactionManager(true);
+            $dao=$manager->getDAO('ExpedienteDAO');
+            $listado=$dao->listar($idProceso);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+        finally{
+            if(isset($manager)){
+                $manager->close();
+            }
+        }
+        return $listado;
     }
 
     /**
@@ -141,6 +158,36 @@ class ProcesoService
         }else{
             return array('estado'=>false,'url'=>null);
         }
+    }
+
+    /**
+     * @param ProcesoDTO $dto
+     */
+    public function  registrarProceso($dto){
+        $info= array('estado'=>false,'menssaje'=>'');
+        try {
+            $manager=new TransactionManager(true);
+            //registrando proceso
+            $daoProceso=$manager->getDAO('ProcesoDAO');
+            $daoProceso->registrar($dto);
+
+            //asignar abogado al caso
+            $daoAbogadoCaso=$manager->getDAO('AbogadoCasoDAO');
+            $daoAbogadoCaso->registrar($dto->getAbogadoCaso());
+
+            $manager->flush();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            if(isset($manager)){
+                $manager->rollback();
+            }
+        }
+        finally{
+            if(isset($manager)){
+                $manager->close();
+            }
+        }
+
     }
 
 
