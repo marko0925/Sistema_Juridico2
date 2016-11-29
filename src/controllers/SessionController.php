@@ -14,10 +14,15 @@ class SessionController extends BaseController
         parent::__construct();
     }
 
+    public function getLogin(){
+        $this->setView('login');
+    }
+
+
     public function getInicioSession(){
-        $info=SesionService::inicioSesion(1,'1234');
+        $info=SesionService::inicioSesion(2,'1234');
         if($info['estado']){
-            $this->redirec('index');
+            $this->redirec('');
             exit();
         }
         else{
@@ -27,7 +32,7 @@ class SessionController extends BaseController
 
     }
 
-    public function geCerrarSession(){
+    public function getCerrarSession(){
         if(SesionService::cerrar()){
             $this->redirec('session/login');
             exit();
