@@ -190,5 +190,23 @@ class ProcesoService
 
     }
 
+    public function listarProcesos(){
+        $listado=null;
+        try {
+            $manager=new TransactionManager(true);
+            $dao=$manager->getDAO('ProcesoDAO');
+            $listado=$dao->listar();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+        finally{
+            if(isset($manager)){
+                $manager->close();
+            }
+        }
+        return $listado;
+
+    }
+
 
 }
