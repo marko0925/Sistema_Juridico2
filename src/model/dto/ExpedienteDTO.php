@@ -28,6 +28,10 @@ class ExpedienteDTO
      * @var string
      */
     private $descripcion;
+    /**
+     * @var string
+     */
+    private $tipo;
 
     /**
      * @return int
@@ -109,6 +113,21 @@ class ExpedienteDTO
         $this->descripcion = $descripcion;
     }
 
+    /**
+     * @return string
+     */
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
+
+    /**
+     * @param string $tipo
+     */
+    public function setTipo($tipo)
+    {
+        $this->tipo = $tipo;
+    }
 
 
 }
