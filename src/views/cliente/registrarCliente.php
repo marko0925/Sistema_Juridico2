@@ -5,7 +5,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="cliente/registrar" method="post">
+        <!--<form role="form" action="cliente/registrar" method="post">-->
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-3">
@@ -42,7 +42,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Contraseña</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1"
+                            <input type="password" class="form-control" name="txtPassCliente" id="exampleInputPassword1"
                                    placeholder="Digita la contraseña">
                         </div>
                     </div>
@@ -84,8 +84,9 @@
             <!-- /.box-body -->
 
             <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Registrar</button>
+                <button  id="RCliente" class="btn btn-primary" onclick="RCliente()">Registrar</button>
+                <button hidden id="ACliente" class="btn btn-primary" onclick="ACliente()">Actualizar</button>
             </div>
-        </form>
+      <!--  </form>-->
     </div>
 </div>

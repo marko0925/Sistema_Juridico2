@@ -22,7 +22,6 @@ function abrirVista(url) {
         //sirve para cargar js a las etiquetas agregadas dinamicamente
         .always(function () {
 
-
         });
 }
 // agregar codigo javascript en ejecucion

@@ -8,7 +8,7 @@
 
             <div class="row">
                 <div class="col-sm-12">
-                    <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
+                    <table id="lista-clientes" class="table table-bordered table-striped dataTable" role="grid"
                            aria-describedby="example1_info">
                         <thead>
                         <tr role="row">
@@ -34,38 +34,14 @@
                                 aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">Fecha
                                 Nacimiento
                             </th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                                style="width: 200px;">Actualizar
+                            </th>
 
                         </tr>
                         </thead>
                         <tbody>
-                        <?php
-                        foreach ($listadoDTO as $dto) {
-                            echo `<tr role="row" class="odd">
-                            <td class="sorting_1"></td>
-                            <td>` + $dto->getDni();
-                            +`</td>
-                            <td>` + $dto->getNombre();
-                            +`</td>
-                            <td>` + $dto->getApellido();
-                            +`</td>
-                            <td>` + $dto->getCorreo();
-                            +`</td>
-                            <td>` + $dto->getTelefono();
-                            +`</td>
-                            <td>` + $dto->getFecha_nac();
-                            +`</td>
-                        </tr>`;
-                        }
-                        ?>
-
-
-                        <tr role="row" class="even">
-                            <td class="sorting_1">Algo</td>
-                            <td>Firefox 1.0</td>
-                            <td>Win 98+ / OSX.2+</td>
-                            <td>1.7</td>
-                            <td>A</td>
-                        </tr>
 
 
                         </tbody>
@@ -110,3 +86,63 @@
     </div>
     <!-- /.box-body -->
 </div>
+<script>
+
+    var tabla = $("#lista-clientes").DataTable({
+        ajax: "cliente/listarClientes",
+        columns: [
+            {data: "dni"},
+            {data: "nombre"},
+            {data: "apellido"},
+            {data: "correo"},
+            {data: "telefono"},
+            {data: "fechaNac"},
+            {
+                data: null,
+                className: "center",
+                defaultContent: '<button  class="btn btn-primary btn-sm">Modificar</button> &nbsp; <button  class="btn btn-danger btn-sm">Eliminar</button>'
+            }
+        ]
+    });
+
+    $('#lista-clientes tbody').on('click', '.btn-primary', function () {
+        var data = tabla.row($(this).parents('tr')).data();
+        $("#contenido-cabecera").html("<h1>Actualizar cliente</h1>");
+        $.get("abogado/formularioRegistrarCliente", function () {
+            console.log('envio solicitud')
+        })
+        //inicia el proceso de lectura o descarga
+            .done(function (data1) {
+                insertHtml('.content', data1);
+            })
+            .fail(function () {
+
+            })
+            //termina todos los proceso de $.get
+            //sirve para cargar js a las etiquetas agregadas dinamicamente
+            .always(function () {
+                $("input[name=txtDniCliente]").attr("disabled", "disabled");
+                $("input[name=txtDniCliente]").val(data.dni);
+                $("input[name=txtNombreCliente]").val(data.nombre);
+                $("input[name=txtApellidoCliente]").val(data.apellido);
+                $("input[name=txtCorreoCliente]").val(data.email);
+                $("input[name=txtPassCliente").val();
+                $("input[name=txtFechaNacimientoCliente]").val(data.fechaNacimiento);
+                $("input[name=txtTelefonoCliente]").val(data.telefono);
+
+                $("#RCliente").attr("hidden", " ");
+                $("#ACliente").removeAttr("hidden");
+
+            });
+
+    });
+    $("#lista-abogados tbody").on("click", "btn-danger", function () {
+        var data = tabla.row($(this).parents('tr')).data();
+        $.post("abogado/eliminarAbogado", {dni: data[0]}, function () {
+            console.log("peticion de eliminacion de " + data[0]);
+        }).done(function (data) {
+            tabla.row($(this).parents("tr")).remove().draw();
+            console.log("se elimino correctamente");
+        });
+    });
+</script>

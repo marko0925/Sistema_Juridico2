@@ -37,39 +37,16 @@
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">
-                            Especialidad
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="CSS grade: activate to sort column ascending" style="width: 110px;">
                             Almamater
+                        </th>
+                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                            style="width: 210px;">Actualizar
                         </th>
                     </tr>
                     </thead>
                     <tbody>
-                    <?php
 
-                    foreach ($listadoAbogados as $dto) {
-                        echo `<tr role="row" class="odd">
-                            <td class="sorting_1"></td>
-                            <td>` + $dto->getDni();
-                        +`</td>
-                            <td>` + $dto->getNombre();
-                        +`</td>
-                            <td>` + $dto->getApellido();
-                        +`</td>
-                            <td>` + $dto->getCorreo();
-                        +`</td>
-                            <td>` + $dto->getTelefono();
-                        +`</td>
-                            <td>` + $dto->getFecha_nac();
-                        +`</td>
-
-                         <td>` + $dto->getAlmamater();
-                        +`</td>
-                        </tr>`;
-                    }
-
-                    ?>
 
                     </tbody>
                 </table>
@@ -112,6 +89,64 @@
     </div>
     <!-- /.box-body -->
 </div>
+
 <script>
+    $(document).ready(function () {
+        var tabla = $("#lista-abogados").DataTable({
+            ajax: "abogado/listarAbogados",
+            columns: [{data: "dni"}, {data: "nombre"}, {data: "apellido"}, {data: "fechaNacimiento"}, {data: "telefono"}, {data: "email"}, {data: "almamater"}, {
+                data: null,
+                className: "center",
+                defaultContent: '<button  class="btn btn-primary btn-sm" >Modificar</button> &nbsp; <button  class="btn btn-danger btn-sm" >Eliminar</button>'
+            }, {data: "especialidad", visible: false}]
+        });
+
+        $('#lista-abogados tbody').on('click', '.btn-primary', function () {
+            var data = tabla.row($(this).parents('tr')).data();
+            $("#contenido-cabecera").html("<h1>Actualizar Abogado</h1>");
+            $.get("abogado/formularioRegistrarAbogado", function () {
+                console.log('envio solicitud')
+            })
+            //inicia el proceso de lectura o descarga
+                .done(function (data) {
+                    insertHtml('.content', data);
+                })
+                .fail(function () {
+
+                })
+                //termina todos los proceso de $.get
+                //sirve para cargar js a las etiquetas agregadas dinamicamente
+                .always(function () {
+                    $("input[name=txtDniAbogado]").attr("disabled", "disabled");
+                    $("input[name=txtDniAbogado]").val(data.dni);
+                    $("input[name=txtNombreAbogado]").val(data.nombre);
+                    $("input[name=txtApellidoAbogado]").val(data.apellido);
+                    $("input[name=txtCorreoAbogado]").val(data.email);
+                    $("input[name=txtPassAbogado").val();
+                    $("input[name=txtFechaNacimientoAbogado]").val(data.fechaNacimiento);
+                    $("input[name=txtTelefonoAbogado]").val(data.telefono);
+                    $("input[name=txtAlmamaterAbogado]").val(data.almamater);
+                    var t = $("#tabla-especialidades").DataTable();
+                    console.log(data.especialidad[0]);
+                    for (var i = 0; i < data.especialidad.length; i++) {
+                        //console.log(data.especialidad[0,data.especialidad[1]]);
+                        t.row.add([data.especialidad[i].nombre, data.especialidad[i].fecha, data.especialidad[i].universidad, data.especialidad[i].acta]).draw();
+                    }
+                    $("#RAbogado").css("display", "none");
+                    $("#AAbogado").removeAttr("style");
+                    $("input[name=txtPassAbogado]").attr("placeholder", "Cambia tu contraseña");
+                });
+
+        });
+        $("#lista-abogados tbody").on("click", "btn-danger", function () {
+            var data = tabla.row($(this).parents('tr')).data();
+            $.post("abogado/eliminarAbogado", {dni: data[0]}, function () {
+                console.log("peticion de eliminacion de " + data[0]);
+            }).done(function (data) {
+                tabla.row($(this).parents("tr")).remove().draw();
+                console.log("se elimino correctamente");
+            });
+        });
+    });
 
 </script>
