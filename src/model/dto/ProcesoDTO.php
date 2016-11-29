@@ -15,7 +15,16 @@ class ProcesoDTO implements JsonSerializable
     /**
      * @var string
      */
+    private $radicado;
+    /**
+     * @var string
+     */
     private $tipoCaso;
+    /**
+     * @var string
+     */
+    private $descripcion;
+
     /**
      * @var string
      */
@@ -39,8 +48,12 @@ class ProcesoDTO implements JsonSerializable
     /**
      * @var  array <AbogadoCasoDTO>
      */
-    private $abogados;
+    private $abogadoCaso;
 
+    /**
+     * @var boolean
+     */
+    private $estado;
     /**
      * @return int
      */
@@ -156,25 +169,77 @@ class ProcesoDTO implements JsonSerializable
     /**
      * @return array
      */
-    public function getAbogados()
+    public function getAbogadoCaso()
     {
-        return $this->abogados;
+        return $this->abogadoCaso;
     }
 
     /**
-     * @param array $abogados
+     * @param array $abogadoCaso
      */
-    public function setAbogados($abogados)
+    public function setAbogadoCaso($abogadoCaso)
     {
-        $this->abogados = $abogados;
+        $this->abogadoCaso = $abogadoCaso;
     }
+
+    /**
+     * @return string
+     */
+    public function getRadicado()
+    {
+        return $this->radicado;
+    }
+
+    /**
+     * @param string $radicado
+     */
+    public function setRadicado($radicado)
+    {
+        $this->radicado = $radicado;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * @param string $descripcion
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * @param boolean $estado
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+    }
+
+
 
     public function jsonSerialize() {
         return [
             'idCaso' => $this->getIdCaso(),
+            'radicado'=>$this->getRadicado(),
             'tipoCaso' => $this->getTipoCaso(),
             'fechaInicio' => $this->getFechaInicio(),
             'fechaFin' => $this->getFechaFin(),
+            'estado'=>$this->isEstado(),
             'juez'=>$this->getJuez(),
             'juez'=>$this->getJuez(),
             'clientes'=>$this->getCliente()
