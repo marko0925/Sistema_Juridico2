@@ -68,5 +68,36 @@ class ProcesoController extends BaseController
         $service->registrarExpedientes($listado);
     }
 
+    public function getRegistrarProceso(){
+        require_once __DIR__.'/../model/dto/ProcesoDTO.php';
+        require_once __DIR__.'/../model/dto/AbogadoCasoDTO.php';
+        $dto= new ProcesoDTO();
+        $dto->setFechaInicio('1-3-2018');
+        $dto->setJuez('fransisco');
+        $dto->setFechaFin('1-3-2018');
+        $dto->setTipoCaso('familiar');
+        //cliente del proceso
+        $dtoCliente= new ClienteDTO();
+        $dtoCliente->setDni(2);
+        //abogado encargado del proceso esto seria consultado la session;
+        $dtoAbogado= new AbogadoDTO();
+        $dtoAbogado->setDni(4);
 
-}
+        $dtoAbogadoCaso= new AbogadoCasoDTO();
+        $dtoAbogadoCaso->setProceso($dto);
+        $dtoAbogadoCaso->setAbogado($dtoAbogado);
+
+        $dto->setAbogadoCaso($dtoAbogadoCaso);
+        $dto->setCliente($dtoCliente);
+
+        $service = new ProcesoService();
+        // parametro  (dtoProceso,idCliente,idAbogado)
+        $service->registrarProceso($dto);
+
+    }
+
+    public function getListarProcesos(){
+        $service = new ProcesoService();
+        $json=json_encode($service->listarProcesos());
+        echo $json;
+    }
