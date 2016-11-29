@@ -14,7 +14,13 @@ class HomeController extends BaseController
     }
 
     public function getIndex(){
-        $this->setView('index');
+        if(SesionService::verificarRol()=='inactivo'){
+            $this->redirec('session/login');
+            exit();
+        }
+        else{
+            $this->setView('index');
+        }
     }
 
     public function postRegistrar(){
