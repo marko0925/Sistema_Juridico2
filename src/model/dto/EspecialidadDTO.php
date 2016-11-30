@@ -2,59 +2,29 @@
 
 /**
  * Created by PhpStorm.
- * User: McBro
- * Date: 29/11/2016
- * Time: 12:26 AM
+ * User: miguel
+ * Date: 16/11/2016
+ * Time: 8:57 PM
  */
-include_once __DIR__."/ClienteDTO.php";
-class ProcesoDTO
+class EspecialidadDTO implements JsonSerializable
 {
-    private $tipo;
+    private $nombre;
     private $descripcion;
-    private $cliente;
-    private $rad;
-    private $fechaini;
-    private $fechafin;
-    private $juez;
-
-
-    /**
-     * ProcesoDTO constructor.
-     * @param $tipo
-     * @param $descripcion
-     * @param $cliente
-     * @param $rad
-     * @param $fechaini
-     * @param $fechafin
-     * @param $juez
-     */
-
-
-    public function __construct($tipo, $descripcion, $cliente, $rad, $fechaini, $fechafin, $juez)
-    {
-        $this->tipo = $tipo;
-        $this->descripcion = $descripcion;
-        $this->cliente = $cliente;
-        $this->rad = $rad;
-        $this->fechaini = $fechaini;
-        $this->fechafin = $fechafin;
-        $this->juez = $juez;
-    }
 
     /**
      * @return mixed
      */
-    public function getTipo()
+    public function getNombre()
     {
-        return $this->tipo;
+        return $this->nombre;
     }
 
     /**
-     * @param mixed $tipo
+     * @param mixed $nombre
      */
-    public function setTipo($tipo)
+    public function setNombre($nombre)
     {
-        $this->tipo = $tipo;
+        $this->nombre = $nombre;
     }
 
     /**
@@ -73,84 +43,16 @@ class ProcesoDTO
         $this->descripcion = $descripcion;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFechaini()
+
+    public function jsonSerialize()
     {
-        return $this->fechaini;
+        return [
+            'nombre' => $this->getNombre(),
+            'descripcion' => $this->getDescripcion(),
+            'institucion' => $this->getInstitucion(),
+            'fecha' => $this->getInstitucion()
+        ];
     }
 
-    /**
-     * @param mixed $fechaini
-     */
-    public function setFechaini($fechaini)
-    {
-        $this->fechaini = $fechaini;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getJuez()
-    {
-        return $this->juez;
-    }
-
-    /**
-     * @param mixed $juez
-     */
-    public function setJuez($juez)
-    {
-        $this->juez = $juez;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRad()
-    {
-        return $this->rad;
-    }
-
-    /**
-     * @param mixed $rad
-     */
-    public function setRad($rad)
-    {
-        $this->rad = $rad;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCliente()
-    {
-        return $this->cliente;
-    }
-
-    /**
-     * @param mixed $cliente
-     */
-    public function setCliente($cliente)
-    {
-        $this->cliente = $cliente;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFechafin()
-    {
-        return $this->fechafin;
-    }
-
-    /**
-     * @param mixed $fechafin
-     */
-    public function setFechafin($fechafin)
-    {
-        $this->fechafin = $fechafin;
-    }
 
 }
