@@ -130,15 +130,16 @@
                 $("input[name=txtFechaNacimientoCliente]").val(data.fechaNacimiento);
                 $("input[name=txtTelefonoCliente]").val(data.telefono);
 
-                $("#RCliente").attr("hidden", " ");
-                $("#ACliente").removeAttr("hidden");
+                $("#RCliente").css("display", "none");
+                $("#ACliente").removeAttr("style");
+                $("input[name=txtPassCliente]").attr("placeholder", "Cambia tu contraseña");
 
             });
 
     });
     $("#lista-abogados tbody").on("click", "btn-danger", function () {
         var data = tabla.row($(this).parents('tr')).data();
-        $.post("abogado/eliminarAbogado", {dni: data[0]}, function () {
+        $.post("cliente/eliminarCliente", {dni: data[0]}, function () {
             console.log("peticion de eliminacion de " + data[0]);
         }).done(function (data) {
             tabla.row($(this).parents("tr")).remove().draw();
