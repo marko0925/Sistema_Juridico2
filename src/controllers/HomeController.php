@@ -32,7 +32,10 @@ class HomeController extends BaseController
           $this->setView('index');
       }
     }
-
+    public function  getSalir(){
+      SesionService::cerrar();
+      $this->redirec('#');
+    }
     public function postRegistrar(){
 
     }
