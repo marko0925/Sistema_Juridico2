@@ -4,7 +4,7 @@
 /**
  * we list the lawyers registered
  */
-$("#listarAbogado").on("click",function () {
+$("#listarAbogado").on("click", function () {
     $("#contenido-cabecera").html("<h1>Abogados Registrados</h1>");
-    abrirVista("abogado/listadoAbogados");
+    abrirVista("abogado/formularioListarAbogados");
 });
