@@ -16,6 +16,7 @@ class ClienteService
              * @var ClienteDAO
              */
             $dao = $manager->getDAO('ClienteDAO');
+            $dto->setTipo('cliente');
             $dao->registrar($dto);
             //guardar
             $manager->flush();
