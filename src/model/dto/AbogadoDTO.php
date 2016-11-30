@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/../dto/EspecialidadDTO.php';
+require_once __DIR__.'/../dto/AbogadoEspecialidadDTO.php';
 require_once __DIR__.'/../dto/PersonaDTO.php';
 /**
  * Created by PhpStorm.
@@ -9,7 +9,13 @@ require_once __DIR__.'/../dto/PersonaDTO.php';
  */
 class AbogadoDTO extends PersonaDTO implements JsonSerializable
 {
-    private $especialidad;
+    /**
+     * @var AbogadoEspecialidadDTO
+     */
+    private $abogadoEspecialidad;
+    /**
+     * @var string
+     */
     private $almamater;
 
     /**
@@ -25,19 +31,19 @@ class AbogadoDTO extends PersonaDTO implements JsonSerializable
     }
 
     /**
-     * @return array
+     * @return AbogadoEspecialidadDTO
      */
-    public function getEspecialidad()
+    public function getAbogadoEspecialidad()
     {
-        return $this->especialidad;
+        return $this->abogadoEspecialidad;
     }
 
     /**
-     * @param array $especialidad
+     * @param AbogadoEspecialidadDTO $abogadoEspecialidad
      */
-    public function setEspecialidad($especialidad)
+    public function setAbogadoEspecialidad($abogadoEspecialidad)
     {
-        $this->especialidad = $especialidad;
+        $this->abogadoEspecialidad = $abogadoEspecialidad;
     }
 
     /**
@@ -70,7 +76,7 @@ class AbogadoDTO extends PersonaDTO implements JsonSerializable
             'telefono' => $this->getTelefono(),
             'email' => $this->getCorreo(),
             'almamater'=>$this->getAlmamater(),
-            'especialidad'=>$this->getEspecialidad()
+            'especialidad'=>$this->getAbogadoEspecialidad()
         ];
     }
 
