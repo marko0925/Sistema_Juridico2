@@ -10,22 +10,9 @@ class EspecialidadDTO implements JsonSerializable
 {
     private $nombre;
     private $descripcion;
-    private $fecha;
-    private $institucion;
 
     /**
-     * EspecialidadDTO constructor.
-     * @param $nombre
-     * @param $descripcion
-     */
-    public function __construct($nombre=null, $descripcion=null)
-    {
-        $this->nombre = $nombre;
-        $this->descripcion = $descripcion;
-    }
-
-    /**
-     * @return string
+     * @return mixed
      */
     public function getNombre()
     {
@@ -33,7 +20,7 @@ class EspecialidadDTO implements JsonSerializable
     }
 
     /**
-     * @param string $nombre
+     * @param mixed $nombre
      */
     public function setNombre($nombre)
     {
@@ -41,7 +28,7 @@ class EspecialidadDTO implements JsonSerializable
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getDescripcion()
     {
@@ -49,55 +36,23 @@ class EspecialidadDTO implements JsonSerializable
     }
 
     /**
-     * @param string $descripcion
+     * @param mixed $descripcion
      */
     public function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFecha()
+
+    public function jsonSerialize()
     {
-        return $this->fecha;
-    }
-
-    /**
-     * @param mixed $fecha
-     */
-    public function setFecha($fecha)
-    {
-        $this->fecha = $fecha;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getInstitucion()
-    {
-        return $this->institucion;
-    }
-
-    /**
-     * @param mixed $institucion
-     */
-    public function setInstitucion($institucion)
-    {
-        $this->institucion = $institucion;
-    }
-
-
-    public function jsonSerialize() {
         return [
             'nombre' => $this->getNombre(),
             'descripcion' => $this->getDescripcion(),
-            'institucion'=>$this->getInstitucion(),
-            'fecha'=>$this->getInstitucion()
+            'institucion' => $this->getInstitucion(),
+            'fecha' => $this->getInstitucion()
         ];
     }
-
 
 
 }
