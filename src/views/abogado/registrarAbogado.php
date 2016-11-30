@@ -135,9 +135,21 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Nombre de la especializaciÃ³n</label>
-                                <input required type="text" placeholder="Nombre de la especializacion hecha."
-                                       class="form-control" name="txtEspecialidadAbogado">
+                                <label>Nombre</label>
+
+                                <select requerid class="form-control" style="width: 100%;"
+                                        tabindex="-1" aria-hidden="true" id="listEsp">
+                                    <option selected></option>
+                                    <?php
+
+                                    foreach ($listado as $esp) {
+                                        //print_r($clie);
+                                        echo '<option value="' . $esp->getNombre() . '">' . $esp->getNombre() . '</option>';
+                                        //echo "<option value='$clie->getDni()'>$clie->getNombre()</option>";
+                                    }
+                                    ?>
+
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -164,10 +176,9 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="exampleInputFile">Subir Acta</label>
-                                <input required type="file" id="exampleInputFile" name="acta">
-
-                                <p class="help-block">Sube una copia de tu acta.</p>
+                                <label>Descripción</label>
+                                <textarea class="form-control" id="descripciontxt" rows="3"
+                                          placeholder="Enter ..."></textarea>
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -197,7 +208,7 @@
                                                     <th>Nombre</th>
                                                     <th>Fecha</th>
                                                     <th>Universidad/Instituto</th>
-                                                    <th>Acta</th>
+                                                    <th>Descripción</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -231,8 +242,9 @@
             </div>
         </div>
     </div>
-    <input id="RAbogado" type="button" class="btn btn-lg btn-primary" onclick="RAbogado()" value="Registrar" style="" >
-    <input  id="AAbogado" type="button" class="btn btn-lg btn-primary" onclick="actualizarA()" value="Actualizar" style="display: none;">
+    <input id="RAbogado" type="button" class="btn btn-lg btn-primary" onclick="RAbogado()" value="Registrar" style="">
+    <input id="AAbogado" type="button" class="btn btn-lg btn-primary" onclick="actualizarA()" value="Actualizar"
+           style="display: none;">
 
     <!--<input type="submit" class="btn btn-lg btn-primary" value="Registrar">
 </form>-->
@@ -247,3 +259,4 @@
     });
 
 </script>
+
