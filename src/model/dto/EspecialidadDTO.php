@@ -12,7 +12,18 @@ class EspecialidadDTO implements JsonSerializable
     private $descripcion;
 
     /**
-     * @return mixed
+     * EspecialidadDTO constructor.
+     * @param $nombre
+     * @param $descripcion
+     */
+    public function __construct($nombre=null, $descripcion=null)
+    {
+        $this->nombre = $nombre;
+        $this->descripcion = $descripcion;
+    }
+
+    /**
+     * @return null
      */
     public function getNombre()
     {
@@ -20,7 +31,7 @@ class EspecialidadDTO implements JsonSerializable
     }
 
     /**
-     * @param mixed $nombre
+     * @param null $nombre
      */
     public function setNombre($nombre)
     {
@@ -28,7 +39,7 @@ class EspecialidadDTO implements JsonSerializable
     }
 
     /**
-     * @return mixed
+     * @return null
      */
     public function getDescripcion()
     {
@@ -36,23 +47,20 @@ class EspecialidadDTO implements JsonSerializable
     }
 
     /**
-     * @param mixed $descripcion
+     * @param null $descripcion
      */
     public function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
     }
 
-
-    public function jsonSerialize()
-    {
+    public function jsonSerialize() {
         return [
             'nombre' => $this->getNombre(),
-            'descripcion' => $this->getDescripcion(),
-            'institucion' => $this->getInstitucion(),
-            'fecha' => $this->getInstitucion()
+            'descripcion' => $this->getDescripcion()
         ];
     }
+
 
 
 }
