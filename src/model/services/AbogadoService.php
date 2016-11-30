@@ -12,16 +12,17 @@ class AbogadoService
     /**
      * @param AbogadoDTO $dto
      */
-    public function registrar($dto)
+  public function registrar($dto)
     {
         try {
             $manager = new TransactionManager(true);
             //registro abogado
             $abogadoDAO = $manager->getDAO("AbogadoDAO");
+            $dto->setPassword(md5($dto->getPassword()));
             $abogadoDAO->registrar($dto);
             //registro especialidad abogado
             $especialidadDAO =$manager->getDAO('EspecialidadDAO');
-            $especialidadDAO->registrarListadoEspecialidad($dto->getDni(),$dto->getEspecialidad());
+            $especialidadDAO->registrarListadoEspecialidad($dto->getDni(),$dto->getAbogadoEspecialidad());
             $manager->flush();
         } catch (Exception $e) {
 
@@ -42,18 +43,20 @@ class AbogadoService
      * Metodo- elimina una de las especialidades de una abogado
      * @param  AbogadoDTO $dto
      */
-    public function actualizar($dto){
+     public function actualizar($dto){
         try {
             $manager = new TransactionManager(true);
             //actualiza abogado
             $abogadoDAO = $manager->getDAO("AbogadoDAO");
+            if($dto->getPassword()!==''){
+                $dto->setPassword(md5($dto->getPassword()));
+            }
             $abogadoDAO->actualizar($dto);
             //actualiza especialidades abogado
             $especialidadDAO=$manager->getDAO('EspecialidadDAO');
             $especialidadDAO->eliminarEspecialidad($dto->getDni());
-            if($dto->getEspecialidad()!==null){
-                $especialidadDAO->eliminarEspecialidad($dto->getDni());
-                $especialidadDAO->registrarListadoEspecialidad($dto->getDni(),$dto->getEspecialidad());
+            if($dto->getAbogadoEspecialidad()!==null){
+                $especialidadDAO->registrarListadoEspecialidad($dto->getDni(),$dto->getAbogadoEspecialidad());
             }
 
             $manager->flush();
@@ -90,6 +93,24 @@ class AbogadoService
       return $listado;
 
     }
+    
+    public function listadoEspecialidades(){
+        $listado=null;
+        try {
+            $manager=new TransactionManager(true);
+            $dao=$manager->getDAO('EspecialidadDAO');
+            $listado=$dao->listarEspecialidades();
+        } catch (Exception $e) {
+            echo $e;
+        }
+        finally{
+            if(isset($manager)){
+                $manager->close();
+            }
+        }
+        return $listado;
+    }
+    
     public function listarEspecializaciones($nit){
       $listado=null;
       try {
@@ -106,4 +127,5 @@ class AbogadoService
       }
       return $listado;
     }
+    
 }
