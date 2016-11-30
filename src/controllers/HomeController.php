@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/../../library/core/BaseController.php';
+require_once __DIR__.'/../model/Services/SesionService.php';
 /**
  * Created by PhpStorm.
  * User: Miguel
@@ -15,12 +16,21 @@ class HomeController extends BaseController
 
     public function getIndex(){
         if(SesionService::verificarRol()=='inactivo'){
-            $this->redirec('session/login');
+            $this->setView('login');
             exit();
         }
         else{
             $this->setView('index');
         }
+    }
+    public function postIndex(){
+      SesionService::inicioSesion($_POST['usuario'],$_POST['contrasena']);
+      if(SesionService::verificarRol()=='inactivo'){
+          $this->setView('login',array("mens"=>"Datos incorrectos vuelva a intentar"));
+          exit();
+      }else{
+          $this->setView('index');
+      }
     }
 
     public function postRegistrar(){
