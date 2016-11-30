@@ -22,21 +22,26 @@ class EspecialidadDAO
      * @return array EspecialidadDTO
      */
     public function findBy($nitAbogado){
-        $sql='SELECT e._nombre,e._descripcion FROM _abog_espec ae INNER JOIN _abogado a ON a._dni_abogado=ae._dni'.
+        $sql='SELECT e._nombre,e._descripcion,ae._fecha,ae._instituto FROM _abog_espec ae INNER JOIN _abogado a ON a._dni_abogado=ae._dni INNER JOIN _especialidad e ON ae._nombre= e._nombre WHERE a._dni_abogado= ?';
         //dejar espacio para evitar  "ae._dniINNERJOIN"
-        ' INNER JOIN _especialidad e ON ae._nombre= e._nombre WHERE a._dni_abogado= ?';
+
         $parametros=array($nitAbogado);
 
         $listado=array();
         $result=$this->con->findBy($sql,$parametros);
         foreach ($result as $row){
+            $dtoAbogadoEspecialidad=new AbogadoEspecialidadDTO();
+            $dtoAbogadoEspecialidad->setInstituto($row['_instituto']);
+            $dtoAbogadoEspecialidad->setFecha($row['_fecha']);
             /**
              * @var EspecialidadDTO
              */
             $dto= new EspecialidadDTO();
             $dto->setNombre($row['_nombre']);
             $dto->setDescripcion($row['_descripcion']);
-            $listado[]=$dto;
+
+            $dtoAbogadoEspecialidad->setEspecialidad($dto);
+            $listado[]=$dtoAbogadoEspecialidad;
         }
         return $listado;
     }
@@ -47,11 +52,32 @@ class EspecialidadDAO
      * @param array $listado
      */
     public function registrarListadoEspecialidad($nit,$listado){
-        $sql='INSERT INTO _abog_espec(_nombre,_dni) VALUES (?,?)';
+        $sql='INSERT INTO _abog_espec(_nombre, _dni, _fecha, _instituto) VALUES (?,?,?,?)';
+        /**
+         * @var AbogadoEspecialidadDTO $item
+         */
         foreach ($listado as $item){
-            $this->con->save($sql,array($item->getNombre(),$nit));
+            $parametros=array($item->getEspecialidad()->getNombre(),$nit,$item->getFecha(),$item->getInstituto());
+            print_r($parametros);
+            $this->con->save($sql,$parametros);
         }
     }
+
+    public function listarEspecialidades(){
+        $sql='SELECT _nombre, _descripcion FROM _especialidad';
+        $result=$this->con->findAll($sql);
+        $listado=[];
+        if(!is_null($result)){
+            foreach ($result as $row){
+                $dto= new EspecialidadDTO();
+                $dto->setNombre($row['_nombre'],$row['_descripcion']);
+                $listado[]=$dto;
+            }
+        }
+        return $listado;
+    }
+
+
 
     /**
      * Metodo- elimina toda las especialidades de un abogado
