@@ -122,7 +122,9 @@
           <!-- Notifications: style can be found in dropdown.less -->
           
           <!-- Tasks: style can be found in dropdown.less -->
-          
+          <li>
+            <a href="home/salir"><i class="fa fa-power-off"></i></a>
+          </li>
           <li>
             <a href="#" style="padding:5px" ><img width="40" src="dist/img/logo_ufps_inverted.png"></a>
           </li>
