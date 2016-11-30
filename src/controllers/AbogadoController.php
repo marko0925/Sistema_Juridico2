@@ -23,24 +23,29 @@ class AbogadoController extends BaseController
     /**
      *estos deberia llamarse "getFormularioRegistro" por que hay no se registra nada ¬¬
      */
-    public function getRegistrarAbogado()
+    public function getFormularioRegistrarAbogado()
     {
-        $this->setView("abogado/registrarAbogado");
+        $abogado = new AbogadoService();
+        $listado = $abogado->listarEspecialidades();
+        $this->setView("abogado/registrarAbogado", array("listado" => $listado));
     }
 
     /**
      *
      */
+    public function getFormularioListarAbogados()
+    {
+        $this->setView("abogado/listarAbogados");
+    }
+
     public function getlistarAbogados()
     {
+
         $service = new AbogadoService();
         $listadoAbogados = $service->listado();
-
-        $json = json_encode($listadoAbogados);
+        $json = json_encode(array("data" => $listadoAbogados));
         echo $json;
         //y eliminar setView();
-
-        $this->setView("abogado/listarAbogados", $listadoAbogados);
     }
 
     /**
@@ -48,60 +53,76 @@ class AbogadoController extends BaseController
      */
     public function postRegistrar()
     {
-        $dni = $_POST["txtDniAbogado"];
-        $nombre = $_POST["txtNombreAbogado"];
-        $apellido = $_POST["txtApellidoAbogado"];
-        $correo = $_POST["txtCorreoAbogado"];
-        $fecha_nac = $_POST["txtFechaNacimientoAbogado"];
-        $telefono = $_POST["txtTelefonoAbogado"];
-        $especialidad = $_POST["txtEspecialidadAbogado"];
-        $almamater = $_POST["txtAlmamaterAbogado"];
-
+        $dni = $_POST["dni"];
+        $nombre = $_POST["nombre"];
+        $apellido = $_POST["apellido"];
+        $correo = $_POST["correo"];
+        $fecha_nac = $_POST["fechaNac"];
+        $telefono = $_POST["telefono"];
+        $especialidad = $_POST["especialidades"];
+        $almamater = $_POST["almamater"];
+        $clave = $_POST["clave"];
         $dto = new AbogadoDTO();
 
-        $dto->setDni(5);
-        $dto->setApellido('jghf kljff');
-        $dto->setNombre('kjjfnf klfjjf');
-        $dto->setCorreo('nmvnnm@gmail.com');
-        $dto->setFecha_nac('1-3-2018');
-        $dto->setTelefono('009032');
-        $dto->setAlmamater('udes');
+        $dto->setDni($dni);
+        $dto->setApellido($nombre);
+        $dto->setNombre($apellido);
+        $dto->setCorreo($correo);
+        $dto->setPassword($clave);
+        $dto->setFecha_nac($fecha_nac);
+        $dto->setTelefono($telefono);
+        $dto->setAlmamater($almamater);
+
         //especialidades abogado
-        $dtoEspecialidad1 = new EspecialidadDTO();
-        $dtoEspecialidad1->setNombre('matrimonio');
-        $dtoEspecialidad2 = new EspecialidadDTO();
-        $dtoEspecialidad2->setNombre('familiar');
-        //agrego las especialidades en un array al atributo especialidad de abogadoDTO
-        $dto->setEspecialidad(array($dtoEspecialidad1, $dtoEspecialidad2));
-        // servicio contiene la logica de negocio
+        $especialidad = json_decode($especialidad);
+        $dtosEsp = [];
+
+        foreach ($especialidad as $esp) {
+            $espe = new EspecialidadDTO();
+            $espe->setNombre($esp[0]);
+            $espe->setFecha($esp[1]);
+            $espe->setInstitucion($esp[2]);
+            $espe->setDescripcion($esp[3]);
+            $dtosEsp[] = $espe;
+        }
+
+        $dto->setEspecialidad($dtosEsp);
         $serviceAbogado = new AbogadoService();
         $serviceAbogado->registrar($dto);
-
     }
 
-    // en proceso de prueba creo que no sirve
-    public function getActualizar()
+    public function postEliminarAbogado()
     {
+        $dni = $_GET["dni"];
+        $service = new AbogadoService();
+        $service->eliminar($dni);
+    }
+
+    public function postActualizar()
+    {
+        $dni = $_POST["dni"];
+        $nombre = $_POST["nombre"];
+        $apellido = $_POST["apellido"];
+        $correo = $_POST["correo"];
+        $fecha_nac = $_POST["fechaNac"];
+        $telefono = $_POST["telefono"];
+        $especialidad = $_POST["especialidades"];
+        $almamater = $_POST["almamater"];
+        $clave = $_POST["clave"];
+
         $dto = new AbogadoDTO();
-        $dto->setDni(4);
-        $dto->setApellido('jghf kljff');
-        $dto->setNombre('kjjfnf klfjjf');
-        $dto->setCorreo('nmvnnm@gmail.com');
-        $dto->setFecha_nac('1-3-2018');
-        $dto->setTelefono('009032');
-        $dto->setAlmamater('upt');
-        /**
-         * @var EspecialidadDTO
-         */
-        $dtoEspecialidad1 = new EspecialidadDTO();
-        $dtoEspecialidad1->setNombre('matrimonio');
-        //s$dtoEspecialidad2 = new EspecialidadDTO();
-        //$dtoEspecialidad2->setNombre('familiar');
-        $dto->setEspecialidad(array($dtoEspecialidad1));
+        $dto->setDni($dni);
+        $dto->setApellido($nombre);
+        $dto->setNombre($apellido);
+        $dto->setCorreo($correo);
+        $dto->setClave($clave);
+        $dto->setFecha_nac($fecha_nac);
+        $dto->setTelefono($telefono);
+        $dto->setAlmamater($almamater);
         $serviceAbogado = new AbogadoService();
         $serviceAbogado->actualizar($dto);
-
     }
+
     // parametro url?nitAbogado=5
     // falta mostrar el array
     public function getListarEspecialiciones()
@@ -113,3 +134,4 @@ class AbogadoController extends BaseController
 
     }
 }
+
