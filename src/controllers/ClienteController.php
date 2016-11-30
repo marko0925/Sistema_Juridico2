@@ -17,17 +17,26 @@ class ClienteController extends BaseController
     }
 
 
-    public function getRegistrarCliente(){
+    public function getFormularioRegistrarCliente(){
         $this->setView("cliente/registrarCliente");
+    }
+
+    public function getListadoClientes(){
+        $this->setView("cliente/listarClientes");
     }
     // sirve
     public function getListarClientes(){
-        $servicio = new ClienteService();
-        $listadoDTO=$servicio->listar();
-		print_r($listadoDTO);
-        $json= json_encode($listadoDTO);
-		echo $json;
+        $listado = $this->postListarClientes2();
+        $json=json_encode(array("data"=>$listado));
+       // $json .= '[{"dni" : "0925","nombre" : "Marlon", "apellido" : "Coronel","correo" : "marlon@gmail.com","telefono" : 5762777,"fechaNac" : "06/04/15"}]';
+        echo $json;
     }
+    public function postListarClientes2(){
+        $servicio = new ClienteService();
+        return $listadoDTO=$servicio->listar();
+    }
+
+
     //sirve
     public function postRegistrar()
     {
@@ -57,6 +66,14 @@ class ClienteController extends BaseController
         $servicio= new ClienteService();
         $servicio->actualizar($dto);
     }
+
+    public function postEliminarAbogado()
+    {
+        $dni = $_GET["dni"];
+        $service = new ClienteService();
+        $service->eliminar($dni);
+    }
+
 
     public function getPruebaConexion()
     {
