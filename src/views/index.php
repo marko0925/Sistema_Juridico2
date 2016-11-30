@@ -50,7 +50,8 @@
                 <div class="col-md-4" id="contenido-cabecera">
 
                 </div>
-                <div class="col-md-8" id="msj">
+
+                <div class="col-md-offset-3 col-md-5" id="msj">
 
                 </div>
             </div>
@@ -90,7 +91,7 @@
 <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <!-- SlimScroll 1.3.0 -->
 <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- ChartJS 1.0.1 -->
+<!-- ChartJS 1.0.1 -->"
 <script src="plugins/chartjs/Chart.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!--<script src="dist/js/pages/dashboard2.js"></script>-->
@@ -107,6 +108,8 @@
 <script src="dist/js/abogado/modificarAbogado.js"></script>
 <script src="dist/js/cliente/listarClientes.js"></script>
 <script src="dist/js/cliente/registrarCliente.js"></script>
+<script src="dist/js/proceso/registrarProceso.js"></script>
+<script src="dist/js/proceso/listarProcesos.js"></script>
 <script src="dist/js/pages/contenedor.js"></script>
 <!--Single-Page-Aplication-Control-->
 <!--<script src="dist/js/spa.js"></script>-->
@@ -136,3 +139,4 @@
 
 </body>
 </html>
+
