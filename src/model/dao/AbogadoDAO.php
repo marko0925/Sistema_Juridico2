@@ -29,8 +29,8 @@ class AbogadoDAO
      */
     public function registrar($dto){
         $estado=false;
-        $sql='INSERT INTO _persona(_dni,_apellido,_nombre,_fecha_nac,_telefono,_correo) VALUES (?,?,?,?,?,?)';
-        $parametros=array($dto->getDni(),$dto->getApellido(),$dto->getNombre(),$dto->getFecha_nac(), $dto->getTelefono(),$dto->getCorreo());
+        $sql='INSERT INTO _persona(_dni,_apellido,_nombre,_fecha_nac,_telefono,_correo,_password) VALUES (?,?,?,?,?,?,?)';
+        $parametros=array($dto->getDni(),$dto->getApellido(),$dto->getNombre(),$dto->getFecha_nac(), $dto->getTelefono(),$dto->getCorreo(),$dto->getPassword());
         if($this->con->save($sql,$parametros)){
             $sql='INSERT INTO _abogado(_dni_abogado,_almamater)VALUES(?,?)';
             $parametros=array($dto->getDni(),$dto->getAlmamater());
@@ -75,7 +75,7 @@ class AbogadoDAO
     }
     private function especialidad($daoEspecialidad,$dto){
       $dtoEspecialidad=$daoEspecialidad->findBy($dto->getDni());
-      $dto->setEspecialidad($dtoEspecialidad);
+      return $dtoEspecialidad;
     }
 
     private function getAbogadoDTO($dni,$nombre,$apellido,$correo,$fechaN,$telefono,$almamater,$dao){
@@ -87,7 +87,7 @@ class AbogadoDAO
         $dto->setFecha_nac($fechaN);
         $dto->setTelefono($telefono);
         $dto->setAlmamater($almamater);
-        $dto->setEspecialidad($this->especialidad($dao,$dto));
+        $dto->setAbogadoEspecialidad($this->especialidad($dao,$dto));
         return $dto;
     }
     public function buscar($idAbogado){
